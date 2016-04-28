@@ -1,11 +1,17 @@
 <h1>Two-way binding in action</h1>
+<p>Name: <input [(ngModel)]="name"></p>
+<p>Name: <input [(ngModel)]="name"></p>
+<p>My name is: {{name}}</p>
 
-<p>Foo: <input [(ngModel)]="foo"></p>
-<p>Foo: <input [(ngModel)]="foo"></p>
-<p>My foo value is: {{foo}}</p>
+<h2>The same, but with less syntax sugar</h2>
+
+<p>Color: <input [ngModel]="color" (ngModelChange)="color=$event;showEvent($event)"></p>
+<p>Color: <input [ngModel]="color" (ngModelChange)="color=$event"></p>
 
 <h2>The same, but without syntax sugar</h2>
 
-<p>Bar: <input bind-ngModel="bar" on-ngModelChange="bar=$event"></p>
-<p>Bar: <input bind-ngModel="bar" on-ngModelChange="bar=$event"></p>
-<p>The bar value is: {{bar}}</p>
+<p>Color: <input bind-ngModel="color" on-ngModelChange="color=$event"></p>
+<p>Color: <input bind-ngModel="color" on-ngModelChange="color=$event"></p>
+<p>The color is: {{color}}</p>
+
+<button (click)="showEvent($event)">Click Me</button>
