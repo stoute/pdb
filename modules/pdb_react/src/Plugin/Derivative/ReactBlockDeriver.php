@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\pdb_ng2\Plugin\Derivative\ReactBlockDeriver.
+ * Contains \Drupal\pdb_react\Plugin\Derivative\ReactBlockDeriver.
  */
 
 namespace Drupal\pdb_react\Plugin\Derivative;

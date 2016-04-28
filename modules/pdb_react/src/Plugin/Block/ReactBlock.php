@@ -15,7 +15,7 @@ use Drupal\pdb\Plugin\Block\PdbBlock;
  * @Block(
  *   id = "react_component",
  *   admin_label = @Translation("React component"),
- *   deriver = "\Drupal\pdb_ng2\Plugin\Derivative\ReactBlockDeriver"
+ *   deriver = "\Drupal\pdb_react\Plugin\Derivative\ReactBlockDeriver"
  * )
  */
 class ReactBlock extends PdbBlock {
