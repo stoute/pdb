@@ -8,11 +8,38 @@
 namespace Drupal\pdb\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Entity\Plugin\DataType\EntityAdapter;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\pdb\FrameworkAwareBlockInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterface {
 
+  /**
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
+   * @var \Symfony\Component\Serializer\Serializer
+   */
+  protected $serializer;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Serializer $serializer) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->serializer = $serializer;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('serializer')
+    );
+  }
   /**
    * {@inheritdoc}
    */
@@ -43,7 +70,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     }
 
     if ($contexts = $this->getContexts()) {
-      // @todo Do something to pass in contexts to components
+      $attached['drupalSettings']['pdb']['contexts'] = $this->getJSContexts($contexts);
     }
     return array(
       '#attached' => $attached,
@@ -123,6 +150,46 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   public function blockSubmit($form, FormStateInterface $form_state) {
     // Save our custom settings when the form is submitted.
     $this->setConfigurationValue('example', $form_state->getValue('example'));
+  }
+
+  /**
+   * @param \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $data
+   * @param array $js_contexts
+   * @param $key
+   */
+  protected function addEntityJSContext(EntityAdapter $data,array &$js_contexts, $key) {
+    $entity = $data->getValue();
+    $entity_access = $entity->access('view', NULL, TRUE);
+    if (!$entity_access->isAllowed()) {
+      return;
+    }
+    foreach ($entity as $field_name => $field) {
+      /** @var \Drupal\Core\Field\FieldItemListInterface $field */
+      $field_access = $field->access('view', NULL, TRUE);
+      // @todo Used addCacheableDependency($field_access);
+
+      if (!$field_access->isAllowed()) {
+        $entity->set($field_name, NULL);
+      }
+    }
+    /** @todo Serialize*/
+    $js_contexts["$key:" . $entity->getEntityTypeId()] = $entity;
+  }
+
+  /**
+   * Get an array of serilized JS contexts.
+   *
+   * @param ContextInterface[] $contexts
+   */
+  protected function getJSContexts(array $contexts) {
+    $js_contexts = [];
+    foreach ($contexts as $key => $context) {
+      $data = $context->getContextData();
+      if ($data instanceof EntityAdapter) {
+        $this->addEntityJSContext($data, $js_contexts, $key);
+      }
+    }
+    return $js_contexts;
   }
 
 }
