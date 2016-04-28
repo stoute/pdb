@@ -24,9 +24,9 @@ class LibrarySubscriber implements EventSubscriberInterface {
     $info = $component['info'];
     // Only override if presentation if ng2.
     if ($info['presentation'] == 'ng2') {
-      if (!isset($libraries['pdb_ng2/pdb.ng2'])) {
+      if (!isset($libraries['pdb_ng2/pdb.ng2.config'])) {
         $libraries += array(
-          'pdb_ng2/pdb.ng2.system',
+          'pdb_ng2/pdb.ng2.config',
         );
       }
     }
