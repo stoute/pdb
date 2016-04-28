@@ -124,49 +124,16 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function blockForm($form, FormStateInterface $form_state) {
-    // @TODO: This is useless right now. In our original module we had a
-    // JSON-ified version of the form API passing necessary fields into Drupal.
-    // A similar approach is necessary.
-    $form = parent::blockForm($form, $form_state);
-
-    // Retrieve existing configuration for this block.
-    $config = $this->getConfiguration();
-
-    // Add a form field to the existing block configuration form.
-    $form['example'] = array(
-      '#type' => 'textfield',
-      '#title' => t('example'),
-      '#default_value' => isset($config['example']) ? $config['example'] : '',
-    );
-    return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function blockValidate($form, FormStateInterface $form_state) {
-    // Nothing yet.
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function blockSubmit($form, FormStateInterface $form_state) {
-    // Save our custom settings when the form is submitted.
-    $this->setConfigurationValue('example', $form_state->getValue('example'));
-  }
-
-  /**
    * Add serialized entity to the JS Contexts.
    *
    * @param \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $data
+   *   The entity to serialize.
    * @param array $js_contexts
-   * @param $key
+   *   The full array of JS contexts.
+   * @param string $key
+   *   The context key.
    */
-  protected function addEntityJSContext(EntityAdapter $data,array &$js_contexts, $key) {
+  protected function addEntityJSContext(EntityAdapter $data, array &$js_contexts, $key) {
     $entity = $data->getValue();
     $entity_access = $entity->access('view', NULL, TRUE);
     if (!$entity_access->isAllowed()) {
@@ -187,9 +154,13 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   }
 
   /**
-   * Get an array of serilized JS contexts.
+   * Get an array of serialized JS contexts.
    *
    * @param \Drupal\Component\Plugin\Context\ContextInterface[] $contexts
+   *   The contexts to serialize.
+   *
+   * @return array
+   *   An array of serialized JS contexts.
    */
   protected function getJSContexts(array $contexts) {
     $js_contexts = [];
