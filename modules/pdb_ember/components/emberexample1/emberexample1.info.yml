@@ -1,0 +1,16 @@
+name: Ember Example
+machine_name: emberexample1
+type: pdb
+description: 'Ember Example Component 1'
+package: Ember
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: ember
+add_js:
+  header:
+  footer:
+add_css:
+  header:
+  footer:
+shared:

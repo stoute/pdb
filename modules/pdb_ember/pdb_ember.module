@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_pdb_presentations().
+ *
+ * Specify our custom drupalSettings for ember blocks.
+ */
+function pdb_ember_pdb_presentations() {
+  $presentations = array(
+    'ember' => 'Ember',
+  );
+  return $presentations;
+}
