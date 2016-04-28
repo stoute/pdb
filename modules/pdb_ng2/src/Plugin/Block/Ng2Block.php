@@ -27,6 +27,9 @@ class Ng2Block extends PdbBlock {
     $info = $this->getComponentInfo();
 
     $build = parent::build();
+    $build['#allowed_tags'] = array(
+      $info['machine_name'],
+    );
     $build['#markup'] = '<' . $info['machine_name'] . ' id="instance-id-' . $this->configuration['uuid'] . '"></' . $info['machine_name'] . '>';
 
     return $build;
