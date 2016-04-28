@@ -67,7 +67,7 @@ class Ng2Block extends PdbBlock {
   public function attachLibraries(array $component) {
     return array(
       'library' => array(
-        'pdb_ng2/angular2',
+        'pdb_ng2/pdb.ng2.config',
       ),
     );
   }
