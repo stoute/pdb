@@ -60,6 +60,9 @@ class PdbBlock extends BlockBase implements ContainerFactoryPluginInterface {
     $markup = $this->getDerivativeMarkup($component, $this->getConfiguration());
     $attached = $this->getDerivativeAttachments($component);
 
+    if ($contexts = $this->getContexts()) {
+      // @todo Do something to pass in contexts to components
+    }
     return array(
       '#markup' => $markup,
       '#allowed_tags' => array('div', 'app', $name),
