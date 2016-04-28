@@ -1,18 +1,6 @@
 <?php
 
 /**
- * Implements hook_pdb_presentations().
- *
- * Specify our custom drupalSettings for react blocks.
- */
-function pdb_react_pdb_presentations() {
-  $presentations = array(
-    'react' => 'React'
-  );
-  return $presentations;
-}
-
-/**
  * Implements hook_library_info_build().
  */
 function pdb_react_library_info_build() {
