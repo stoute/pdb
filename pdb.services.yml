@@ -1,5 +1,0 @@
-services:
-  pdb.framework.initialize:
-    class: Drupal\pdb\EventSubscriber\InitializeSubscriber
-    tags:
-      - { name: event_subscriber }
