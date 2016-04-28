@@ -26,6 +26,9 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     $attached = array_merge_recursive($attached, $this->attachLibraries($component));
     $attached = array_merge_recursive($attached, $this->attachPageHeader($component));
 
+    if ($contexts = $this->getContexts()) {
+      // @todo Do something to pass in contexts to components
+    }
     return array(
       '#attached' => $attached,
     );
