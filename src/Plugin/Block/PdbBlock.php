@@ -21,10 +21,26 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     $this->configuration['uuid'] = \Drupal::service('uuid')->generate();
 
     $attached = array();
-    $attached = array_merge_recursive($attached, $this->attachFramework($component));
-    $attached = array_merge_recursive($attached, $this->attachSettings($component));
-    $attached = array_merge_recursive($attached, $this->attachLibraries($component));
-    $attached = array_merge_recursive($attached, $this->attachPageHeader($component));
+
+    $framework = $this->attachFramework($component);
+    if ($framework) {
+      $attached = array_merge_recursive($attached, $framework);
+    }
+
+    $settings = $this->attachSettings($component);
+    if ($settings) {
+      $attached = array_merge_recursive($attached, $settings);
+    }
+
+    $libraries = $this->attachLibraries($component);
+    if ($libraries) {
+      $attached = array_merge_recursive($attached, $libraries);
+    }
+
+    $header = $this->attachPageHeader($component);
+    if ($header) {
+      $attached = array_merge_recursive($attached, $header);
+    }
 
     if ($contexts = $this->getContexts()) {
       // @todo Do something to pass in contexts to components
