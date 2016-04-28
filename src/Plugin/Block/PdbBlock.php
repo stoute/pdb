@@ -22,9 +22,17 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    */
   protected $serializer;
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, Serializer $serializer = NULL) {
+  /**
+   * PdbBlock constructor.
+   *
+   * @param array $configuration
+   * @param string $plugin_id
+   * @param mixed $plugin_definition
+   * @param \Symfony\Component\Serializer\Serializer $serializer
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Serializer $serializer) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->serializer = \Drupal::service('serializer');
+    $this->serializer = $serializer;
   }
 
   /**
@@ -152,6 +160,8 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   }
 
   /**
+   * Add serialized entity to the JS Contexts.
+   *
    * @param \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $data
    * @param array $js_contexts
    * @param $key
@@ -171,7 +181,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
         $entity->set($field_name, NULL);
       }
     }
-    /** @todo Serialize*/
+    // Serialize the entity.
     $serialized_entity = $this->serializer->serialize($entity, 'json');
     $js_contexts["$key:" . $entity->getEntityTypeId()] = $serialized_entity;
   }
@@ -179,7 +189,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   /**
    * Get an array of serilized JS contexts.
    *
-   * @param ContextInterface[] $contexts
+   * @param \Drupal\Component\Plugin\Context\ContextInterface[] $contexts
    */
   protected function getJSContexts(array $contexts) {
     $js_contexts = [];
