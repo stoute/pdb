@@ -8,36 +8,12 @@
 namespace Drupal\pdb\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
-use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\pdb\Plugin\Extension\PdbExtensionDiscovery;
 
 /**
  * Provides a deriver for pdb blocks.
  */
-class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
-  /**
-   * The base plugin ID.
-   *
-   * @var string
-   */
-  protected $basePluginId;
-
-  /**
-   * Constructs a PdbBlockDeriver instance.
-   */
-  public function __construct($base_plugin_id) {
-    $this->basePluginId = $base_plugin_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, $base_plugin_id) {
-    return new static(
-      $base_plugin_id
-    );
-  }
+class PdbBlockDeriver extends DeriverBase {
 
   /**
    * {@inheritdoc}
