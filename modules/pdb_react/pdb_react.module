@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * React helpers.
+ */
+
+/**
+ * Implements hook_library_info_build().
+ */
+function pdb_react_library_info_build() {
+  $libraries = [];
+  // Add a library whose information changes depending on certain conditions.
+  $libraries['components'] = [
+    'version' => '1.0.0',
+    'dependencies' => [
+      'pdb_react/react',
+    ],
+  ];
+  // @TODO: How do we get components on the page from here?? This needs to be
+  // dynamic for a proper proof of concept.
+  $libraries['components'] += [
+    'js' => [
+      '/modules/pdb/modules/pdb_react/components/react_example_1/react-example-1.js' => [],
+    ],
+  ];
+  return $libraries;
+}
