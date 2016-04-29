@@ -2,8 +2,9 @@ import {Component} from "angular2/core";
 import {bootstrap} from "angular2/platform/browser";
 
 @Component({
+  moduleId: __moduleName,
   selector: "ng2-example-2",
-  templateUrl: "/modules/pdb/modules/pdb_ng2/components/ng2-example-2/ng2-example-2.html",
+  templateUrl: 'template.html'
 })
 class AppComponent {
   name: string = "John";
