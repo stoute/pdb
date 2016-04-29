@@ -118,7 +118,14 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * {@inheritdoc}
    */
   public function attachSettings(array $component) {
-    return array();
+    if (isset($component['settings'])) {
+      return array(
+        'drupalSettings' => $component['settings'],
+      );
+    }
+    else {
+      return array();
+    }
   }
 
   /**
