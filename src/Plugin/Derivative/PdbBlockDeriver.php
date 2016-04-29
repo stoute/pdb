@@ -8,11 +8,9 @@
 namespace Drupal\pdb\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
-use Drupal\Core\Extension\ExtensionDiscovery;
-use Drupal\Core\Extension\InfoParserInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
+use Drupal\pdb\ComponentDiscoveryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -21,30 +19,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
 
   /**
-   * The module handler.
+   * The component discovery service.
    *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   * @var \Drupal\pdb\ComponentDiscoveryInterface
    */
-  protected $moduleHandler;
-
-  /**
-   * The info parser.
-   *
-   * @var \Drupal\Core\Extension\InfoParserInterface
-   */
-  protected $infoParser;
+  protected $componentDiscovery;
 
   /**
    * PdbBlockDeriver constructor.
    *
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler.
-   * @param \Drupal\Core\Extension\InfoParserInterface $info_parser
-   *   The info parser.
+   * @param \Drupal\pdb\ComponentDiscoveryInterface $component_discovery
+   *   The component discovery service.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, InfoParserInterface $info_parser) {
-    $this->moduleHandler = $module_handler;
-    $this->infoParser = $info_parser;
+  public function __construct(ComponentDiscoveryInterface $component_discovery) {
+    $this->componentDiscovery = $component_discovery;
   }
 
   /**
@@ -52,8 +40,7 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
    */
   public static function create(ContainerInterface $container, $base_plugin_id) {
     return new static(
-      $container->get('module_handler'),
-      $container->get('info_parser')
+      $container->get('pdb.component_discovery')
     );
   }
 
@@ -62,7 +49,7 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
     // Get all custom blocks which should be rediscovered.
-    $components = $this->getComponents();
+    $components = $this->componentDiscovery->getComponents();
     foreach ($components as $block_id => $block_info) {
       $this->derivatives[$block_id] = $base_plugin_definition;
       $this->derivatives[$block_id]['info'] = $block_info->info;
@@ -73,44 +60,6 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
       }
     }
     return $this->derivatives;
-  }
-
-  /**
-   * Helper function to scan and collect component .info.yml data.
-   *
-   * This is based on system.module function _system_rebuild_module_data().
-   *
-   * @TODO: The results of this need to be cached.
-   *
-   * @return \Drupal\Core\Extension\Extension[]
-   *   An associative array of component information.
-   */
-  public function getComponents() {
-    $listing = new ExtensionDiscovery(\Drupal::root());
-
-    // Find components.
-    $components = $listing->scan('pdb');
-
-    // Set defaults for module info.
-    $defaults = array(
-      'dependencies' => array(),
-      'description' => '',
-      'package' => 'Other',
-      'version' => NULL,
-    );
-
-    // Read info files for each module.
-    foreach ($components as $key => $component) {
-      // Look for the info file.
-      $component->info = $this->infoParser->parse($component->getPathname());
-      $component->info['path'] = $component->origin . '/' . $component->subpath;
-
-      // Merge in defaults and save.
-      $components[$key]->info = $component->info + $defaults;
-    }
-    $this->moduleHandler->alter('component_info', $components);
-
-    return $components;
   }
 
   /**
