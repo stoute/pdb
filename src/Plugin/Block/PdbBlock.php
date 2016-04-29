@@ -216,7 +216,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     $definition = $this->getPluginDefinition();
     $elements = [];
     if (isset($definition['info']['configuration'])) {
-      $elements = $this->createElementsFormSettings($definition['info']['configuration'], $form_state);
+      $elements = $this->createElementsFromConfiguration($definition['info']['configuration'], $form_state);
       $elements['#title'] = $this->t('Component Settings');
       $elements['#type'] = 'details';
       $elements['#open'] = TRUE;
@@ -226,17 +226,19 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   }
 
   /**
-   * @param $settings
+   * Create Form API elements from component configuration.
+   *
+   * @param $configuration
    *
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *
    * @return array
    *   Form elements.
    */
-  protected function createElementsFormSettings($settings, FormStateInterface $form_state) {
+  protected function createElementsFromConfiguration($configuration, FormStateInterface $form_state) {
     $elements = [];
     $defaults = $this->configuration['pdb_configuration'];
-    foreach ($settings as $key => $setting) {
+    foreach ($configuration as $key => $setting) {
       $element = [];
       foreach ($setting as $property_key => $property) {
         $element["#$property_key"] = $property;
