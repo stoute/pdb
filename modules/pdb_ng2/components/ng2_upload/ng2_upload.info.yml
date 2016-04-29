@@ -1,0 +1,24 @@
+name: NG2 Upload
+machine_name: ng2-upload
+type: pdb
+description: 'NG 2 Upload'
+package: NG2
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: ng2
+settings:
+  SystemJS:
+    map:
+      ng2-file-upload: '/libraries/ng2-file-upload'
+    packages:
+      ng2-file-upload:
+        main: ng2-file-upload
+        defaultExtension: ts
+add_js:
+  header:
+  footer:
+add_css:
+  header:
+  footer:
+shared:
