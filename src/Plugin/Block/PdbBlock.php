@@ -86,7 +86,8 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
       $attached['drupalSettings']['pdb']['contexts'] = $this->getJSContexts($contexts);
     }
     if (isset($this->configuration['pdb_configuration'])) {
-      $attached['drupalSettings']['pdb']['configuration'][$this->getPluginId()] = $this->configuration['pdb_configuration'];
+      // @todo Is there anything else unique to key off of besides uuid
+      $attached['drupalSettings']['pdb']['configuration'][$this->configuration['uuid']] = $this->configuration['pdb_configuration'];
     }
     return array(
       '#attached' => $attached,
@@ -234,6 +235,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     foreach ($configuration as $key => $setting) {
       $element = [];
       foreach ($setting as $property_key => $property) {
+        // @todo Create whitelist or blacklist of form api properties
         $element["#$property_key"] = $property;
       }
       if (isset($defaults[$key])) {
