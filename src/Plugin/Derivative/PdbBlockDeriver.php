@@ -8,8 +8,6 @@
 namespace Drupal\pdb\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
-use Drupal\Core\Extension\InfoParserInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
 use Drupal\pdb\ComponentDiscoveryInterface;
@@ -33,7 +31,7 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
    * @param \Drupal\pdb\ComponentDiscoveryInterface $component_discovery
    *   The component discovery service.
    */
-  public function __construct(ComponentDiscoveryInterface $component_discovery, ModuleHandlerInterface $module_handler, InfoParserInterface $info_parser) {
+  public function __construct(ComponentDiscoveryInterface $component_discovery) {
     $this->componentDiscovery = $component_discovery;
   }
 
