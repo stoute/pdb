@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 
-var path = "/modules/pdb/modules/pdb_ng2/components/ng2-example-1/ng2-example-1.html";
+var path = "/modules/pdb/modules/pdb_ng2/components/ng2_example_1/ng2-example-1.html";
 
 @Component({
   selector: 'ng2-example-1',
