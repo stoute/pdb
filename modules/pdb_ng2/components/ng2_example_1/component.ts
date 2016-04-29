@@ -1,10 +1,9 @@
 import {Component} from 'angular2/core';
 
-var path = "/modules/pdb/modules/pdb_ng2/components/ng2_example_1/ng2-example-1.html";
-
 @Component({
+  moduleId: __moduleName,
   selector: 'ng2-example-1',
-  templateUrl : path,
+  templateUrl: 'template.html',
 })
 export class Ng2Example1 {
 }

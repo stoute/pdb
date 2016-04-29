@@ -68,7 +68,10 @@ class ComponentDiscovery extends ExtensionDiscovery implements ComponentDiscover
     foreach ($components as $key => $component) {
       // Look for the info file.
       $component->info = $this->infoParser->parse($component->getPathname());
-      $component->info['path'] = $component->origin . '/' . $component->subpath;
+
+      if (empty($component->info['path'])) {
+        $component->info['path'] = $component->getPath() . '/component.ts';
+      }
 
       // Merge in defaults and save.
       $components[$key]->info = $component->info + $defaults;
