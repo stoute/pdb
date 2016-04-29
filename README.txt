@@ -80,6 +80,17 @@ Current maintainers:
  * Matt Davis (mrjmd) - https://www.drupal.org/u/mrjmd
    <matt.davis at yourdrupaldev DOT com>
 
+Early Contributors:
+ * Jason Smith
+ * Jeff Lu
+ * Shawn Stedman
+ * Emma Cortes
+ * Mark Casias
+ * Bob Kepford
+ * Derek Reese
+ * Adam Globus-Hoenich
+ * Ted Bowman
+
 This project has been sponsored by:
  * Mediacurrent
    Mediacurrent helps organizations build highly impactful, elegantly designed
