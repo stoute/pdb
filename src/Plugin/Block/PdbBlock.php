@@ -9,6 +9,7 @@ namespace Drupal\pdb\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\Plugin\DataType\EntityAdapter;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdb\FrameworkAwareBlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -83,6 +84,9 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
 
     if ($contexts = $this->getContexts()) {
       $attached['drupalSettings']['pdb']['contexts'] = $this->getJSContexts($contexts);
+    }
+    if (isset($this->configuration['pdb_configuration'])) {
+      $attached['drupalSettings']['pdb']['configuration'][$this->getPluginId()] = $this->configuration['pdb_configuration'];
     }
     return array(
       '#attached' => $attached,
@@ -183,6 +187,66 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
       }
     }
     return $js_contexts;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildConfigurationForm($form, $form_state);
+    $form['pdb_configuration'] = $this->buildComponentSettingsForm($form_state);
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+    parent::submitConfigurationForm($form, $form_state);
+    $this->configuration['pdb_configuration'] = $form_state->getValue('pdb_configuration');
+  }
+
+  /**
+   * Build settings component settings form.
+   *
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   */
+  protected function buildComponentSettingsForm(FormStateInterface $form_state) {
+    $definition = $this->getPluginDefinition();
+    $elements = [];
+    if (isset($definition['info']['configuration'])) {
+      $elements = $this->createElementsFormSettings($definition['info']['configuration'], $form_state);
+      $elements['#title'] = $this->t('Component Settings');
+      $elements['#type'] = 'details';
+      $elements['#open'] = TRUE;
+      $elements['#tree'] = TRUE;
+    }
+    return $elements;
+  }
+
+  /**
+   * @param $settings
+   *
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *
+   * @return array
+   *   Form elements.
+   */
+  protected function createElementsFormSettings($settings, FormStateInterface $form_state) {
+    $elements = [];
+    $defaults = $this->configuration['pdb_configuration'];
+    foreach ($settings as $key => $setting) {
+      $element = [];
+      foreach ($setting as $property_key => $property) {
+        $element["#$property_key"] = $property;
+      }
+      if (isset($defaults[$key])) {
+        $element['#default_value'] = $defaults[$key];
+      }
+      $elements[$key] = $element;
+    }
+    return $elements;
   }
 
 }
