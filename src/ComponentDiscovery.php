@@ -72,6 +72,12 @@ class ComponentDiscovery extends ExtensionDiscovery implements ComponentDiscover
       if (empty($component->info['path'])) {
         $component->info['path'] = $component->getPath() . '/component.ts';
       }
+      else {
+        $path = $component->info['path'];
+        if ($path{0} != '/') {
+          $component->info['path'] = $component->getPath() . '/' . $path;
+        }
+      }
 
       // Merge in defaults and save.
       $components[$key]->info = $component->info + $defaults;
