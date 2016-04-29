@@ -53,7 +53,7 @@ class Ng2Block extends PdbBlock {
 
     $attached = array();
     $attached['drupalSettings']['ng2']['components']['instance-id-' . $uuid] = array(
-      'uri' => '/' . $component['path'],
+      'uri' => $component['path'],
       'element' => $machine_name,
     );
     $attached['drupalSettings']['apps'][$machine_name]['uri'] = '/' . $component['path'];
