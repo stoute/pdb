@@ -9,7 +9,6 @@ namespace Drupal\pdb\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\Plugin\DataType\EntityAdapter;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdb\FrameworkAwareBlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,6 +17,8 @@ use Symfony\Component\Serializer\Serializer;
 abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterface, ContainerFactoryPluginInterface {
 
   /**
+   * The serializer.
+   *
    * @var \Symfony\Component\Serializer\Serializer
    */
   protected $serializer;
@@ -26,9 +27,13 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * PdbBlock constructor.
    *
    * @param array $configuration
+   *   Plugin configuration.
    * @param string $plugin_id
+   *   The plugin ID.
    * @param mixed $plugin_definition
+   *   The plugin definition.
    * @param \Symfony\Component\Serializer\Serializer $serializer
+   *   The serializer.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, Serializer $serializer) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);

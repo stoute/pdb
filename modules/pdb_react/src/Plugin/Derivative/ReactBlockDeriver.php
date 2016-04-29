@@ -9,6 +9,9 @@ namespace Drupal\pdb_react\Plugin\Derivative;
 
 use Drupal\pdb\Plugin\Derivative\PdbBlockDeriver;
 
+/**
+ * Derives block plugin definitions for React components.
+ */
 class ReactBlockDeriver extends PdbBlockDeriver {
 
   /**
