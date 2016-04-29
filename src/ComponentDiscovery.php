@@ -11,6 +11,12 @@ use Drupal\Core\Extension\ExtensionDiscovery;
 use Drupal\Core\Extension\InfoParserInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
+/**
+ * Discovery service for front-end components provided by modules and themes.
+ *
+ * Components (anything whose info file 'type' is 'pdb') are treated as Drupal
+ * extensions unto themselves.
+ */
 class ComponentDiscovery extends ExtensionDiscovery implements ComponentDiscoveryInterface {
 
   /**

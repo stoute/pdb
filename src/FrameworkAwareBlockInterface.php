@@ -9,6 +9,9 @@ namespace Drupal\pdb;
 
 use Drupal\Core\Block\BlockPluginInterface;
 
+/**
+ * Defines the interface for block plugins which expose a front-end component.
+ */
 interface FrameworkAwareBlockInterface extends BlockPluginInterface {
 
   /**

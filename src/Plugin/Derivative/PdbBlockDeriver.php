@@ -63,12 +63,15 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
   }
 
   /**
+   * Creates the context definitions required by a block plugin.
+   *
    * @param array $contexts
    *   Contexts as defined in component label.
    *
    * @return \Drupal\Core\Plugin\Context\ContextDefinition[]
    *   Array of context to be used by block module
-   *   @todo where is this defined in block module
+   *
+   * @todo where is this defined in block module
    */
   protected function createContexts(array $contexts) {
     $contextsDefinitions = [];

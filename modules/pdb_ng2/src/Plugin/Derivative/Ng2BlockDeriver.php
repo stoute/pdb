@@ -9,6 +9,9 @@ namespace Drupal\pdb_ng2\Plugin\Derivative;
 
 use Drupal\pdb\Plugin\Derivative\PdbBlockDeriver;
 
+/**
+ * Derives block plugin definitions for Angular 2 components.
+ */
 class Ng2BlockDeriver extends PdbBlockDeriver {
 
   /**
