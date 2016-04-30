@@ -48,11 +48,15 @@ class Ng2Block extends PdbBlock {
    * {@inheritdoc}
    */
   public function attachSettings(array $component) {
+    $attached = parent::attachSettings($component);
+
     $machine_name = $component['machine_name'];
     $uuid = $this->configuration['uuid'];
 
-    $attached = array();
-    $attached['drupalSettings']['ng2']['components']['instance-id-' . $uuid]['uri'] = $component['path'];
+    $attached['drupalSettings']['ng2']['components']['instance-id-' . $uuid] = [
+      'uri' => $component['path'],
+      'element' => $machine_name,
+    ];
     $attached['drupalSettings']['apps'][$machine_name]['uri'] = '/' . $component['path'];
 
     return $attached;
