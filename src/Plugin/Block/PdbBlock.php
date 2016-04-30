@@ -13,16 +13,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdb\FrameworkAwareBlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Serializer\Serializer;
 
 abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterface, ContainerFactoryPluginInterface {
-
-  /**
-   * The serializer.
-   *
-   * @var \Symfony\Component\Serializer\Serializer
-   */
-  protected $serializer;
 
   /**
    * PdbBlock constructor.
@@ -33,12 +25,9 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    *   The plugin ID.
    * @param mixed $plugin_definition
    *   The plugin definition.
-   * @param \Symfony\Component\Serializer\Serializer $serializer
-   *   The serializer.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, Serializer $serializer) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->serializer = $serializer;
   }
 
   /**
@@ -48,8 +37,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     return new static(
       $configuration,
       $plugin_id,
-      $plugin_definition,
-      $container->get('serializer')
+      $plugin_definition
     );
   }
 
@@ -165,9 +153,8 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
         $entity->set($field_name, NULL);
       }
     }
-    // Serialize the entity.
-    $serialized_entity = $this->serializer->serialize($entity, 'json');
-    $js_contexts["$key:" . $entity->getEntityTypeId()] = $serialized_entity;
+
+    $js_contexts["$key:" . $entity->getEntityTypeId()] = $entity->toArray();
   }
 
   /**
