@@ -5,5 +5,5 @@ import {Component} from 'angular2/core';
   selector: 'ng2-example-configuration',
   templateUrl: 'template.html',
 })
-export class Ng2ExampleSettings {
+export class Ng2ExampleConfiguration {
 }
