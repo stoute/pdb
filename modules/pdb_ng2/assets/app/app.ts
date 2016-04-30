@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import {ScrollLoader} from '../classes/scroll-loader.ts';
 import {GlobalProviders} from '../classes/global-providers.ts';
 
-var injectables = drupalSettings.ng2.global_injectables;
+var injectables = drupalSettings.pdb.ng2.global_injectables;
 var globalProviders = new GlobalProviders(injectables);
 var importPromises = globalProviders.importGlobalInjectables();
 
@@ -18,7 +18,7 @@ Promise.all(importPromises).then((globalServices) => {
   var globalProvidersArray = globalProviders.createGlobalProvidersArray(globalServices);
 
   // components contains metadata about all ng2 components on the page.
-  var components = drupalSettings.ng2.components;
+  var components = drupalSettings.pdb.ng2.components;
   // app is the main root component, using longform bootstrap to allow multiple
   // components to be bootstrapped by ScrollLoader.
   var app = platform(BROWSER_PROVIDERS).application([BROWSER_APP_PROVIDERS, ...globalProvidersArray]);
