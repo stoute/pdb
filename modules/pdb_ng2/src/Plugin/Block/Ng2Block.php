@@ -29,7 +29,7 @@ class Ng2Block extends PdbBlock {
 
     $build = parent::build();
     $build['#allowed_tags'] = array($machine_name);
-    $build['#markup'] = '<' . $machine_name . ' id="' . $this->configuration['uuid'] . '"></' . $machine_name . '>';
+    $build['#markup'] = '<' . $machine_name . ' id="instance-id-' . $this->configuration['uuid'] . '"></' . $machine_name . '>';
 
     return $build;
   }
@@ -53,7 +53,7 @@ class Ng2Block extends PdbBlock {
     $machine_name = $component['machine_name'];
     $uuid = $this->configuration['uuid'];
 
-    $attached['drupalSettings']['pdb']['ng2']['components'][$uuid] = [
+    $attached['drupalSettings']['pdb']['ng2']['components']['instance-id-' . $uuid] = [
       'uri' => $component['path'],
       'element' => $machine_name,
     ];
