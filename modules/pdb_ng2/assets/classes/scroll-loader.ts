@@ -110,7 +110,7 @@ export class ScrollLoader {
    * @param {string} selector - selctor of DOM element to bootstrap into
    */
   bootstrapComponent(id, ngClassName, selector) {
-    let componentFile = drupalSettings.ng2.components[id]["uri"];
+    let componentFile = drupalSettings.pdb.ng2.components[id]["uri"];
 
     System.import(componentFile).then((componentClass) => {
       return componentClass[ngClassName];
