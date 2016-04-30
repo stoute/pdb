@@ -6,6 +6,7 @@ import {Component, Inject, ElementRef} from 'angular2/core';
   templateUrl: 'template.html',
 })
 export class Ng2ExampleConfiguration {
+  // We define default values in our YAML file instead of here.
   public text: string = '';
   constructor(
       @Inject(ElementRef) elRef: ElementRef,
