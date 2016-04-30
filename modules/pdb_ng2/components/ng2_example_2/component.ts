@@ -6,13 +6,7 @@ import {bootstrap} from "angular2/platform/browser";
   selector: "ng2-example-2",
   templateUrl: 'template.html'
 })
-class AppComponent {
+export class Ng2Example2{
   name: string = "John";
   color: string = "Red";
-
-  showEvent(e: any) {
-    console.log(e);
-  }
 }
-
-bootstrap(AppComponent);
