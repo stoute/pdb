@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class PdbBlock.
- * 
+ *
  * @package Drupal\pdb\Plugin\Block
  */
 abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterface, ContainerFactoryPluginInterface {
@@ -217,7 +217,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   /**
    * Create Form API elements from component configuration.
    *
-   * @param $configuration
+   * @param array $configuration
    *   The configuration array.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state array.
