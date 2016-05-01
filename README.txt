@@ -79,8 +79,8 @@ DEVELOPING FOR PDB
      code.
 
    - If your component requires instance configuration you can add fields in the
-     info.yml file that will be displayed on block placement for the site builder
-     to fill out. Configuration values are passed to the client via
+     info.yml file that will be displayed on block placement for the site
+     builder to fill out. Configuration values are passed to the client via
      drupalSettings.pdb.
 
    - Use a JSON endpoint.

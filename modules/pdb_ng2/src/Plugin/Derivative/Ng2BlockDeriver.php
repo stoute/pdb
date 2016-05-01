@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb_ng2\Plugin\Derivative\Ng2BlockDeriver.
- */
-
 namespace Drupal\pdb_ng2\Plugin\Derivative;
 
 use Drupal\pdb\Plugin\Derivative\PdbBlockDeriver;

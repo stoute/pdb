@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb_react\Plugin\Block\ReactBlock.
- */
-
 namespace Drupal\pdb_react\Plugin\Block;
 
 use Drupal\pdb\Plugin\Block\PdbBlock;

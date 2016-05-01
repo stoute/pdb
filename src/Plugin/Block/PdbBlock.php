@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb\Plugin\Block\PdbBlock.
- */
-
 namespace Drupal\pdb\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
@@ -14,6 +9,10 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\pdb\FrameworkAwareBlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class PdbBlock
+ * @package Drupal\pdb\Plugin\Block
+ */
 abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterface, ContainerFactoryPluginInterface {
 
   /**
@@ -71,7 +70,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     }
 
     if ($contexts = $this->getContexts()) {
-      $attached['drupalSettings']['pdb']['contexts'] = $this->getJSContexts($contexts);
+      $attached['drupalSettings']['pdb']['contexts'] = $this->getJsContexts($contexts);
     }
     if (isset($this->configuration['pdb_configuration'])) {
       // @todo Is there anything else unique to key off of besides uuid
@@ -138,17 +137,17 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * @param string $key
    *   The context key.
    */
-  protected function addEntityJSContext(EntityAdapter $data, array &$js_contexts, $key) {
+  protected function addEntityJsContext(EntityAdapter $data, array &$js_contexts, $key) {
     $entity = $data->getValue();
     $entity_access = $entity->access('view', NULL, TRUE);
     if (!$entity_access->isAllowed()) {
       return;
     }
     foreach ($entity as $field_name => $field) {
-      /** @var \Drupal\Core\Field\FieldItemListInterface $field */
+      // @var \Drupal\Core\Field\FieldItemListInterface $field
       $field_access = $field->access('view', NULL, TRUE);
-      // @todo Used addCacheableDependency($field_access);
 
+      // @todo Used addCacheableDependency($field_access);
       if (!$field_access->isAllowed()) {
         $entity->set($field_name, NULL);
       }
@@ -166,12 +165,12 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * @return array
    *   An array of serialized JS contexts.
    */
-  protected function getJSContexts(array $contexts) {
+  protected function getJsContexts(array $contexts) {
     $js_contexts = [];
     foreach ($contexts as $key => $context) {
       $data = $context->getContextData();
       if ($data instanceof EntityAdapter) {
-        $this->addEntityJSContext($data, $js_contexts, $key);
+        $this->addEntityJsContext($data, $js_contexts, $key);
       }
     }
     return $js_contexts;
@@ -199,6 +198,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * Build settings component settings form.
    *
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state array.
    */
   protected function buildComponentSettingsForm(FormStateInterface $form_state) {
     $definition = $this->getPluginDefinition();
@@ -217,8 +217,9 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * Create Form API elements from component configuration.
    *
    * @param $configuration
-   *
+   *   The configuration array.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state array.
    *
    * @return array
    *   Form elements.

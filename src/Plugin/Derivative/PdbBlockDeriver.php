@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb\Plugin\Derivative\PdbBlockDeriver.
- */
-
 namespace Drupal\pdb\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
@@ -74,13 +69,13 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
    * @todo where is this defined in block module
    */
   protected function createContexts(array $contexts) {
-    $contextsDefinitions = [];
+    $contexts_definitions = [];
     if (isset($contexts['entity'])) {
       // @todo Check entity type exists and fail!
-      $contextsDefinitions['entity'] = new ContextDefinition('entity:' . $contexts['entity']);
+      $contexts_definitions['entity'] = new ContextDefinition('entity:' . $contexts['entity']);
     }
     // @todo Dynamically handle unknown context definitions
-    return $contextsDefinitions;
+    return $contexts_definitions;
   }
 
 }

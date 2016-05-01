@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb_react\Plugin\Derivative\ReactBlockDeriver.
- */
-
 namespace Drupal\pdb_react\Plugin\Derivative;
 
 use Drupal\pdb\Plugin\Derivative\PdbBlockDeriver;

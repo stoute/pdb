@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb_ng2\Plugin\Block\Ng2Block.
- */
-
 namespace Drupal\pdb_ng2\Plugin\Block;
 
 use Drupal\pdb\Plugin\Block\PdbBlock;
