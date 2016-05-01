@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb\FrameworkAwareBlockInterface.
- */
-
 namespace Drupal\pdb;
 
 use Drupal\Core\Block\BlockPluginInterface;

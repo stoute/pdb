@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb\ComponentDiscovery.
- */
-
 namespace Drupal\pdb;
 
 use Drupal\Core\Extension\ExtensionDiscovery;
