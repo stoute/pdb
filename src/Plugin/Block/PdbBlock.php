@@ -10,7 +10,8 @@ use Drupal\pdb\FrameworkAwareBlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class PdbBlock
+ * Class PdbBlock.
+ * 
  * @package Drupal\pdb\Plugin\Block
  */
 abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterface, ContainerFactoryPluginInterface {
