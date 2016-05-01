@@ -59,6 +59,9 @@ DEVELOPING FOR PDB
    - Writing components for existing frameworks should be straightforward, write
      them as usual and add an info.yml file declaring them to the module.
 
+   - When you find gaps in functionality you need, post them to the issue queue,
+     this module is still in early development stages.
+
  * Writing your own framework definitions:
 
    - By extending the main pdb block and deriver classes and adding a library
@@ -67,6 +70,22 @@ DEVELOPING FOR PDB
 
    - For now you can use the existing pdb_ng2 and pdb_react as examples for
      how to proceed.
+
+ * Options for getting data from Drupal in components
+
+   - If you give your component a required context, it will only appear on pages
+     with that context available, and automatically pass that data forward using
+     drupalSettings.pdb.contexts. See the ng2_example_node component for sample
+     code.
+
+   - If your component requires instance configuration you can add fields in the
+     info.yml file that will be displayed on block placement for the site builder
+     to fill out. Configuration values are passed to the client via
+     drupalSettings.pdb.
+
+   - Use a JSON endpoint.
+
+   - Use the GraphQL module.
 
 
 MAINTAINERS
