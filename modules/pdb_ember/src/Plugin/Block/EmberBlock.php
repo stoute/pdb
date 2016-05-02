@@ -26,7 +26,9 @@ class EmberBlock extends PdbBlock {
   public function build() {
     $info = $this->getComponentInfo();
     $machine_name = $info['machine_name'];
+
     $build = parent::build();
+    $build['#allowed_tags'] = [$machine_name];
     $build['#markup'] = '<' . $machine_name . ' id="instance-id-' . $machine_name . '"></' . $machine_name . '>';
 
     return $build;

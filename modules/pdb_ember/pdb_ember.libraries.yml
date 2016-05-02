@@ -3,7 +3,6 @@ ember:
   js:
     //code.jquery.com/jquery-2.0.0.min.js: {type: external, minified: true}
     //emberjs.com.s3.amazonaws.com/getting-started/handlebars.js: {type: external, minified: false}
-    //emberjs.com.s3.amazonaws.com/getting-started/handlebars.js: {type: external, minified: false}
     //emberjs.com.s3.amazonaws.com/getting-started/ember.js: {type: external, minified: false}
     //emberjs.com.s3.amazonaws.com/getting-started/ember-data.js: {type: external, minified: false}
     //emberjs.com.s3.amazonaws.com/getting-started/local_storage_adapter.js: {type: external, minified: false}
