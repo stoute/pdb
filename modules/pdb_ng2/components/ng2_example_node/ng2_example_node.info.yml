@@ -9,10 +9,3 @@ module_status: active
 presentation: ng2
 contexts:
   entity: node
-add_js:
-  header:
-  footer:
-add_css:
-  header:
-  footer:
-shared:
