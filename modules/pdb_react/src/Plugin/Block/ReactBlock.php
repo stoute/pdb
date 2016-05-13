@@ -45,12 +45,18 @@ class ReactBlock extends PdbBlock {
    * {@inheritdoc}
    */
   public function attachLibraries(array $component) {
-    return array(
-      'library' => array(
-        'pdb_react/react',
-        'pdb_react/components',
-      ),
+    $parent_libraries = parent::attachLibraries($component);
+
+    $framework_libraries = array(
+      'pdb_react/react',
+      'pdb_react/components',
     );
+
+    $libraries = array(
+      'library' => array_merge($parent_libraries, $framework_libraries)
+    );
+
+    return $libraries;
   }
 
 }
