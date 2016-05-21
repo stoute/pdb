@@ -34,7 +34,7 @@ class Ng2Block extends PdbBlock {
    */
   public function attachFramework(array $component) {
     $attached = array();
-    $attached['drupalSettings']['pdb']['ng2']['global_injectables'] = array();
+    $attached['drupalSettings']['pdb']['ng2']['global_injectables'] = [];
 
     return $attached;
   }
@@ -52,6 +52,7 @@ class Ng2Block extends PdbBlock {
       'uri' => $component['path'],
       'element' => $machine_name,
     ];
+    $attached['drupalSettings']['pdb']['ng2']['module_path'] = drupal_get_path('module', 'pdb_ng2');
 
     return $attached;
   }
