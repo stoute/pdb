@@ -104,7 +104,19 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    * {@inheritdoc}
    */
   public function attachLibraries(array $component) {
-    return array();
+    // Attach the header and footer component library.
+    $path   = 'pdb/' . $component['machine_name'];
+    $component_libraries = array();
+
+    if (isset($component['add_css']['header']) || isset($component['add_js']['header'])) {
+      $component_libraries[] = $path . '/header';
+    }
+
+    if (isset($component['add_css']['footer']) || isset($component['add_js']['footer'])) {
+      $component_libraries[] = $path . '/footer';
+    }
+
+    return $component_libraries;
   }
 
   /**

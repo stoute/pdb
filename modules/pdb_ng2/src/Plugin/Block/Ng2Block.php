@@ -60,11 +60,17 @@ class Ng2Block extends PdbBlock {
    * {@inheritdoc}
    */
   public function attachLibraries(array $component) {
-    return array(
-      'library' => array(
-        'pdb_ng2/pdb.ng2.config',
-      ),
+    $parent_libraries = parent::attachLibraries($component);
+
+    $framework_libraries = array(
+      'pdb_ng2/pdb.ng2.config',
     );
+
+    $libraries = array(
+      'library' => array_merge($parent_libraries, $framework_libraries)
+    );
+
+    return $libraries;
   }
 
 }
