@@ -15,10 +15,3 @@ settings:
       ng2-file-upload:
         main: ng2-file-upload
         defaultExtension: ts
-add_js:
-  header:
-  footer:
-add_css:
-  header:
-  footer:
-shared:

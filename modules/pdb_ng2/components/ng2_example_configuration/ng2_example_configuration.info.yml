@@ -12,10 +12,3 @@ configuration:
     type: textfield
     title: 'What do you want to say?'
     default_value: 'Hello world!'
-add_js:
-  header:
-  footer:
-add_css:
-  header:
-  footer:
-shared:
