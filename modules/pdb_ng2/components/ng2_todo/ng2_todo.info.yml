@@ -1,7 +1,7 @@
-name: NG2 Hero
-machine_name: ng2-hero
+name: NG2 ToDo
+machine_name: ng2-todo
 type: pdb
-description: 'NG 2 Hero block, a basic example'
+description: 'NG 2 ToDo example component'
 package: NG2
 version: '1.0.0'
 core: '8.x'
