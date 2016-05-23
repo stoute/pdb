@@ -41,6 +41,8 @@
     return extended;
   }
 
+  var modulePath = drupalSettings.path.baseUrl +
+      drupalSettings.pdb.ng2.module_path;
   var config = {
     // Use typescript for compilation.
     transpiler: 'typescript',
@@ -50,7 +52,7 @@
     },
     // Map tells the System loader where to look for things.
     map: {
-      app: '/modules/pdb/modules/pdb_ng2/assets/app'
+      app: modulePath + '/assets/app'
     },
     // Packages defines our app package.
     packages: {

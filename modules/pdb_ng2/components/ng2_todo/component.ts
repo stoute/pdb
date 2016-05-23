@@ -3,8 +3,8 @@ import {TodoStore, Todo} from './services/store.ts';
 
 @Component({
     selector: 'ng2-todo',
-    templateUrl: Drupal.url('modules/pdb/modules/pdb_ng2/components/ng2_todo/template.html'),
-    styleUrls: [Drupal.url('modules/pdb/modules/pdb_ng2/components/ng2_todo/style.css')],
+    templateUrl: Drupal.url(drupalSettings.pdb.ng2.module_path + '/components/ng2_todo/template.html'),
+    styleUrls: [Drupal.url(drupalSettings.pdb.ng2.module_path + '/components/ng2_todo/style.css')],
     providers: [TodoStore]
 })
 export class Ng2Todo {
