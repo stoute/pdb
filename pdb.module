@@ -47,16 +47,21 @@ function pdb_library_info_build() {
     // Build a library to include assets in header.
     if (!empty($library_header)) {
       $library_header['header'] = TRUE;
+      // Add dependency on presentation library.
+      $pres = $info['presentation'];
+      $library_header['dependencies'] = array('pdb_' . $pres . '/' . $pres);
       $libraries += [$info['machine_name'] . '/header' => $library_header];
     }
 
     // Build a library to include assets in footer.
     if (!empty($library_footer)) {
+      // Add dependency on presentation library.
+      $pres = $info['presentation'];
+      $library_header['dependencies'] = array('pdb_' . $pres . '/' . $pres);
       $libraries += [$info['machine_name'] . '/footer' => $library_footer];
     }
   }
 
-  // print_r($libraries);die('test');
   return $libraries;
 }
 
@@ -98,7 +103,6 @@ function _pdb_library_build_js($info, $path) {
     $footer_js = _pdb_library_build_get_assets($info['add_js']['footer'], $path);
     $js_assets['footer'] = ['js' => $footer_js];
   }
-
   return $js_assets;
 }
 
@@ -107,7 +111,6 @@ function _pdb_library_build_js($info, $path) {
  */
 function _pdb_library_build_get_assets($assets, $path, $group = FALSE) {
   $processed = [];
-
   foreach ($assets as $asset_file => $asset_data) {
     $asset_path = '/' . $path . '/' . $asset_file;
 
@@ -118,6 +121,5 @@ function _pdb_library_build_get_assets($assets, $path, $group = FALSE) {
   if ($group) {
     $processed = [$group => $processed];
   }
-
   return $processed;
 }
