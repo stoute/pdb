@@ -5,8 +5,8 @@
  * - Load components on demand when a compnent element is scolled, resized or
  *   orientationchanged into view.
  */
-import {Renderer,ElementRef, ApplicationRef, DynamicComponentLoader, Injector, provide, platform, PACKAGE_ROOT_URL} from "angular2/core";
-import {APP_COMPONENT_REF_PROMISE} from "angular2/src/core/application_tokens";
+import {ComponentResolver, ComponentFactory, ApplicationRef} from "@angular/core";
+
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/fromEvent";
 import "rxjs/add/operator/debounceTime";
@@ -135,19 +135,12 @@ export class ScrollLoader {
    * @returns {object} - ComponentRef of boostrapped component
    */
   bootstrapWithCustomSelector(app, component, selector: string) {
-    let bootstrapProviders = [
-      provide(APP_COMPONENT_REF_PROMISE, {
-        useFactory: (dynamicComponentLoader: DynamicComponentLoader, appRef: ApplicationRef, injector: Injector) => {
-            let ref;
-            return dynamicComponentLoader.loadAsRoot(component, selector, injector, () => {
-              appRef._unloadComponent(ref);
-            }).then((componentRef) => ref = componentRef)
-          },
-          deps: [DynamicComponentLoader, ApplicationRef, Injector]
-      })
-    ];
-
-    return app.bootstrap(component, bootstrapProviders);
+    var componentResolver: ComponentResolver = app.injector.get(ComponentResolver);
+    return componentResolver.resolveComponent(component).then((cf : ComponentFactory) =>
+    {
+      cf.selector = selector;
+      return app.bootstrap(cf);
+    });
   }
 
   /**

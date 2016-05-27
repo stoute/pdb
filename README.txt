@@ -39,6 +39,8 @@ INSTALLATION
 
  * Enable the module and at least one javascript framework sub-module (Angular 2
    is the most fleshed out currently).
+ * For Angular 2 use, before enabling the Angular 2 sub-module you must navigate
+   to the pdb_ng2 directory and run `npm install`.
 
 
 CONFIGURATION

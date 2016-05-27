@@ -1,7 +1,7 @@
-import {platform, Component, PACKAGE_ROOT_URL} from 'angular2/core';
-import {bootstrap, BROWSER_PROVIDERS, BROWSER_APP_PROVIDERS} from 'angular2/platform/browser';
-
-import 'rxjs/add/operator/map';
+import {Component, ApplicationRef, ReflectiveInjector, createPlatform} from "@angular/core";
+import {BROWSER_PROVIDERS} from "@angular/platform-browser";
+import {BROWSER_APP_DYNAMIC_PROVIDERS} from "@angular/platform-browser-dynamic";
+import "rxjs/add/operator/map";
 
 import {ScrollLoader} from '../classes/scroll-loader.ts';
 import {GlobalProviders} from '../classes/global-providers.ts';
@@ -18,10 +18,12 @@ Promise.all(importPromises).then((globalServices) => {
   var globalProvidersArray = globalProviders.createGlobalProvidersArray(globalServices);
 
   // components contains metadata about all ng2 components on the page.
-  var components = drupalSettings.pdb.ng2.components;
-  // app is the main root component, using longform bootstrap to allow multiple
-  // components to be bootstrapped by ScrollLoader.
-  var app = platform(BROWSER_PROVIDERS).application([BROWSER_APP_PROVIDERS, ...globalProvidersArray]);
-  var loader = new ScrollLoader(app, components);
+  let components = drupalSettings.pdb.ng2.components;
+
+  let platform = createPlatform(ReflectiveInjector.resolveAndCreate(BROWSER_PROVIDERS));
+  let app = ReflectiveInjector.resolveAndCreate([BROWSER_APP_DYNAMIC_PROVIDERS, ...globalProvidersArray],
+      platform.injector).get(ApplicationRef);
+
+  let loader = new ScrollLoader(app, components);
   loader.initialize();
 });

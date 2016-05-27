@@ -2,7 +2,7 @@
  * Load shared global services and inject as providers in main app bootstrap to
  * create one shared service instance between all components.
  */
-import {provide} from "angular2/core";
+import {provide} from "@angular/core";
 
 export class GlobalProviders {
   injectables: any;
@@ -25,7 +25,7 @@ export class GlobalProviders {
       // must use use absolute path in System.import
       let filename = this.injectables[ngServiceClassName];
       importPromises.push(System.import(filename));
-    };
+    }
 
     return importPromises;
   }

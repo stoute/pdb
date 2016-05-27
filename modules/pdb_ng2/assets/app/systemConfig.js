@@ -43,6 +43,42 @@
 
   var modulePath = drupalSettings.path.baseUrl +
       drupalSettings.pdb.ng2.module_path;
+
+  // Map tells the System loader where to look for things.
+  var map = {
+    app:                          modulePath + '/assets/app',
+    '@angular':                   modulePath + '/node_modules/@angular',
+    'rxjs':                       modulePath + '/node_modules/rxjs'
+  };
+
+  var packages = {
+    app: {
+      main: 'app',
+      defaultExtension: 'ts'
+    },
+    'rxjs': {
+      defaultExtension: 'js'
+    }
+  };
+
+  var ngPackageNames = [
+    'common',
+    'compiler',
+    'core',
+    'http',
+    'platform-browser',
+    'platform-browser-dynamic',
+    'router',
+    'router-deprecated',
+    'upgrade'
+  ];
+
+  // Add package entries for angular packages
+  ngPackageNames.forEach(function(pkgName) {
+    // Bundled version (fewer requests):
+    packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
+  });
+
   var config = {
     // Use typescript for compilation.
     transpiler: 'typescript',
@@ -50,20 +86,9 @@
     typescriptOptions: {
       emitDecoratorMetadata: true
     },
-    // Map tells the System loader where to look for things.
-    map: {
-      app: modulePath + '/assets/app'
-    },
     // Packages defines our app package.
-    packages: {
-      app: {
-        main: 'app',
-        defaultExtension: 'ts'
-      },
-      angular: {
-        defaultExtension: false
-      }
-    }
+    packages: packages,
+    map: map
   };
 
   if ('SystemJS' in drupalSettings) {
