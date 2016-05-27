@@ -28,16 +28,6 @@ pdb.ng2.polyfills:
   js:
     //code.angularjs.org/2.0.0-beta.14/angular2-polyfills.min.js: { type: external, minified: true }
 
-pdb.ng2.http:
-  remote: https://github.com/angular/angular.js
-  version: 2.0.0-rc.1
-  license:
-    name: MIT
-    url: https://github.com/angular/angular.js/blob/master/LICENSE
-    gpl-compatible: true
-  js:
-    //code.angularjs.org/2.0.0-beta.14/http.min.js: { type: external, minified: true }
-
 pdb.ng2.rx:
   remote: https://github.com/angular/angular.js
   version: 2.0.0-rc.1
@@ -46,7 +36,7 @@ pdb.ng2.rx:
     url: https://github.com/angular/angular.js/blob/master/LICENSE
     gpl-compatible: true
   js:
-    node_modules/rxjs/Rx.js: { type: external, minified: false }
+    node_modules/rxjs/Rx.js: { minified: false }
 
 pdb.ng2.config:
   js:
@@ -57,5 +47,4 @@ pdb.ng2.config:
     - pdb_ng2/pdb.ng2.system
     - pdb_ng2/pdb.ng2.typescript
     - pdb_ng2/pdb.ng2.polyfills
-    - pdb_ng2/pdb.ng2.http
     - pdn_ng2/pdb.ng2.rx
