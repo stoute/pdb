@@ -54,6 +54,14 @@ class Ng2Block extends PdbBlock {
     ];
     $attached['drupalSettings']['pdb']['ng2']['module_path'] = drupal_get_path('module', 'pdb_ng2');
 
+    $config_settings = \Drupal::config('pdb_ng2.settings');
+    if (isset($config_settings)) {
+      $attached['drupalSettings']['pdb']['ng2']['development_mode'] = $config_settings->get('development_mode');
+    }
+    else {
+      $attached['drupalSettings']['pdb']['ng2']['development_mode'] = TRUE;
+    }
+
     return $attached;
   }
 
