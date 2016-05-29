@@ -6,10 +6,12 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class PdbNg2Form
+ * Class PdbNg2Form.
+ *
  * @package Drupal\pdb_ng2\Form
  */
 class PdbNg2Form extends ConfigFormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -43,13 +45,14 @@ class PdbNg2Form extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
-    // Set variables based on form values
+    // Set variables based on form values.
     $development_mode = $form_state->getValue('development_mode');
     // Get the config object.
     $config = \Drupal::service('config.factory')
       ->getEditable('pdb_ng2.settings');
-    // Set the values the user submitted in the form
+    // Set the values the user submitted in the form.
     $config->set('development_mode', $development_mode);
     $config->save();
   }
+
 }
