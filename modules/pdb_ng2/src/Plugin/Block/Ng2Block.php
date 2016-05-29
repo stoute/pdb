@@ -76,7 +76,7 @@ class Ng2Block extends PdbBlock {
     );
 
     $libraries = array(
-      'library' => array_merge($parent_libraries, $framework_libraries)
+      'library' => array_merge($parent_libraries, $framework_libraries),
     );
 
     return $libraries;

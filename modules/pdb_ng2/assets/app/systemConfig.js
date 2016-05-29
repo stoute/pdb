@@ -51,10 +51,10 @@
 
   // Map tells the System loader where to look for things.
   var map = {
-    'app':                      modulePath + '/assets/app',
-    '@angular':                 modulePath + '/node_modules/@angular',
-    'rxjs':                       modulePath + '/node_modules/rxjs',
-    'primeng':                    modulePath + '/node_modules/primeng'
+    'app': modulePath + '/assets/app',
+    '@angular': modulePath + '/node_modules/@angular',
+    'rxjs': modulePath + '/node_modules/rxjs',
+    'primeng': modulePath + '/node_modules/primeng'
   };
 
   var packages = {
