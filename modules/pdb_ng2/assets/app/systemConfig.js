@@ -1,3 +1,8 @@
+/**
+ * @file
+ * This builds our system config and imports our main app file.
+ */
+
 (function (drupalSettings) {
   'use strict';
 
@@ -46,9 +51,10 @@
 
   // Map tells the System loader where to look for things.
   var map = {
-    app:                          modulePath + '/assets/app',
-    '@angular':                   modulePath + '/node_modules/@angular',
-    'rxjs':                       modulePath + '/node_modules/rxjs'
+    app:                        modulePath + '/assets/app',
+    @angular:                   modulePath + '/node_modules/@angular',
+    rxjs:                       modulePath + '/node_modules/rxjs',
+    primeng:                    modulePath + '/node_modules/primeng'
   };
 
   var packages = {
@@ -56,7 +62,10 @@
       main: 'app',
       defaultExtension: 'ts'
     },
-    'rxjs': {
+    rxjs: {
+      defaultExtension: 'js'
+    },
+    primeng: {
       defaultExtension: 'js'
     }
   };
@@ -73,10 +82,13 @@
     'upgrade'
   ];
 
-  // Add package entries for angular packages
-  ngPackageNames.forEach(function(pkgName) {
-    // Bundled version (fewer requests):
-    packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
+  // Add package entries for angular packages.
+  ngPackageNames.forEach(function (pkgName) {
+    // Bundled version (fewer requests).
+    packages['@angular/' + pkgName] = {
+      main: pkgName + '.umd.js',
+      defaultExtension: 'js'
+    };
   });
 
   var config = {

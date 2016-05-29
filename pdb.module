@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * PDB Module.
+ */
+
+/**
  * Implements hook_library_info_build().
  */
 function pdb_library_info_build() {

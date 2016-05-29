@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\pdb_ember\Plugin\Block\EmberBlock.
- */
-
 namespace Drupal\pdb_ember\Plugin\Block;
 
 use Drupal\pdb\Plugin\Block\PdbBlock;

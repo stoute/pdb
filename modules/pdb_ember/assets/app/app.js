@@ -1,5 +1,8 @@
-var App = Ember.Application.create();
+/**
+ * @file
+ * Our main ember app.
+ */
 
 App = Ember.Application.extend({
-  rootElement: "#instance-id-emberexample1",
+  rootElement: '#instance-id-emberexample1'
 });
