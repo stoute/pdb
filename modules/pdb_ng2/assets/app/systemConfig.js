@@ -49,9 +49,16 @@
   var modulePath = drupalSettings.path.baseUrl +
       drupalSettings.pdb.ng2.module_path;
 
+  var ext = 'ts';
+
+  if (drupalSettings.pdb.ng2.development_mode === 0) {
+    ext = 'js';
+  }
+
   // Map tells the System loader where to look for things.
   var map = {
     'app': modulePath + '/assets/app',
+    'classes': modulePath + '/assets/classes',
     '@angular': modulePath + '/node_modules/@angular',
     'rxjs': modulePath + '/node_modules/rxjs',
     'primeng': modulePath + '/node_modules/primeng'
@@ -60,12 +67,12 @@
   var packages = {
     app: {
       main: 'app',
-      defaultExtension: 'ts'
+      defaultExtension: ext
+    },
+    classes: {
+      defaultExtension: ext
     },
     rxjs: {
-      defaultExtension: 'js'
-    },
-    primeng: {
       defaultExtension: 'js'
     }
   };

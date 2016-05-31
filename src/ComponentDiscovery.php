@@ -65,7 +65,13 @@ class ComponentDiscovery extends ExtensionDiscovery implements ComponentDiscover
       $component->info = $this->infoParser->parse($component->getPathname());
 
       if (empty($component->info['path'])) {
-        $component->info['path'] = $component->getPath() . '/component.ts';
+        // TODO: This can't stay here, this is ng2 specific.
+        $config_settings = \Drupal::config('pdb_ng2.settings');
+        $ext = 'js';
+        if (isset($config_settings) && $config_settings->get('development_mode')) {
+          $ext = 'ts';
+        }
+        $component->info['path'] = $component->getPath() . '/component.' . $ext;
       }
       else {
         $path = $component->info['path'];
