@@ -3,8 +3,8 @@ import {BROWSER_PROVIDERS} from "@angular/platform-browser";
 import {BROWSER_APP_DYNAMIC_PROVIDERS} from "@angular/platform-browser-dynamic";
 import "rxjs/add/operator/map";
 
-import {ScrollLoader} from '../classes/scroll-loader.ts';
-import {GlobalProviders} from '../classes/global-providers.ts';
+import {ScrollLoader} from '../classes/scroll-loader';
+import {GlobalProviders} from '../classes/global-providers';
 
 var injectables = drupalSettings.pdb.ng2.global_injectables;
 var globalProviders = new GlobalProviders(injectables);

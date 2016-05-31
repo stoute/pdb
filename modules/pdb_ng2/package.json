@@ -12,7 +12,11 @@
   "license": "UNLICENSED",
   "readmeFilename": "README.txt",
   "scripts": {
-    "start": "npm install"
+    "start": "npm install",
+    "postinstall": "typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
@@ -26,7 +30,11 @@
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.3",
     "rxjs": "5.0.0-beta.6",
-    "typescript": "^1.8.10",
+    "typings": "^0.8.1",
     "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "jasmine-core": "~2.4.1"
   }
 }
