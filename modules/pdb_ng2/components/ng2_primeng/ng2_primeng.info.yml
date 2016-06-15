@@ -1,0 +1,9 @@
+name: NG2 Prime-Ng
+machine_name: ng2-primeng
+type: pdb
+description: 'NG 2 Prime NG bar chart'
+package: NG2
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: ng2
