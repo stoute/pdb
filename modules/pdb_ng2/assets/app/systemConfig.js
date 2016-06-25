@@ -60,7 +60,11 @@
     'app': modulePath + '/assets/app',
     'classes': modulePath + '/assets/classes',
     '@angular': modulePath + '/node_modules/@angular',
-    'rxjs': modulePath + '/node_modules/rxjs',
+    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
+  };
+
+  var paths = {
+    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
   };
 
   var packages = {
@@ -72,6 +76,7 @@
       defaultExtension: ext
     },
     rxjs: {
+      main: 'bundles/Rx.umd.js',
       defaultExtension: 'js'
     }
   };
@@ -105,7 +110,8 @@
     },
     // Packages defines our app package.
     packages: packages,
-    map: map
+    map: map,
+    paths: paths
   };
 
   if ('SystemJS' in drupalSettings) {
