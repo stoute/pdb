@@ -61,7 +61,6 @@
     'classes': modulePath + '/assets/classes',
     '@angular': modulePath + '/node_modules/@angular',
     'rxjs': modulePath + '/node_modules/rxjs',
-    'primeng': modulePath + '/node_modules/primeng'
   };
 
   var packages = {
@@ -84,7 +83,6 @@
     'http',
     'platform-browser',
     'platform-browser-dynamic',
-    'router',
     'router-deprecated',
     'upgrade'
   ];
@@ -93,7 +91,7 @@
   ngPackageNames.forEach(function (pkgName) {
     // Bundled version (fewer requests).
     packages['@angular/' + pkgName] = {
-      main: pkgName + '.umd.js',
+      main: 'bundles/' + pkgName + '.umd.js',
       defaultExtension: 'js'
     };
   });
