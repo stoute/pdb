@@ -59,6 +59,7 @@
   var map = {
     'app': modulePath + '/assets/app',
     'classes': modulePath + '/assets/classes',
+    'components': modulePath + '/components',
     '@angular': modulePath + '/node_modules/@angular',
     'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
   };
@@ -73,6 +74,9 @@
       defaultExtension: ext
     },
     classes: {
+      defaultExtension: ext
+    },
+    components: {
       defaultExtension: ext
     },
     rxjs: {

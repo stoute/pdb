@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {TodoStore, Todo} from './services/store.ts';
+import {TodoStore, Todo} from './services/store';
 
 @Component({
     moduleId: __moduleName,
