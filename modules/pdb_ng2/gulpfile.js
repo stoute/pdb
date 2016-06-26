@@ -4,15 +4,16 @@ var gulp = require('gulp');
 var del = require('del');
 var exec = require('child_process').exec;
 
-//clean the temp dirs
+// Clean the temp dirs.
 function clean(){
     return del([
-        'dist/**',
-        'generated/**'
+        'components/**/*.js',
+        'assets/classes/*.js',
+        'assets/app/app.js'
     ]);
 }
 
-//run angular's compiler
+// Run angular's template compiler.
 function precompile(cb){
     exec('./node_modules/.bin/ngc -p components', function(err, stdout, stderr){
         console.log(stdout);
@@ -21,7 +22,7 @@ function precompile(cb){
     });
 }
 
-//run tsc
+// Run tsc.
 function compile(cb){
     exec('./node_modules/.bin/tsc', function(err, stdout, stderr){
         console.log(stdout);
@@ -30,7 +31,7 @@ function compile(cb){
     });
 }
 
-//copy the sources next to the generated
+// Copy the sources next to the generated.
 function copy_src(){
     return gulp.src(['components/**/*.ts'])
         .pipe(gulp.dest('generated'));
