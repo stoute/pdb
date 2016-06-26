@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Hero } from '../ng2_hero/hero';
+import { Hero } from '../hero';
 
 @Component({
   moduleId: __moduleName,
