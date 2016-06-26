@@ -40,6 +40,7 @@ function copy_src(){
         .pipe(gulp.dest('generated'));
 }
 
+// Task definitions.
 gulp.task('compile', compile);
 gulp.task('precompile', ['copy:src'], precompile);
 gulp.task('copy:src', ['clean'], copy_src);
