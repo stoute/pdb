@@ -8,8 +8,11 @@ var exec = require('child_process').exec;
 function clean(){
     return del([
         'components/**/*.js',
+        'components/**/*.js.map',
         'assets/classes/*.js',
-        'assets/app/app.js'
+        'assets/classes/*.js.map',
+        'assets/app/app.js',
+        'assets/app/app.js.map'
     ]);
 }
 
