@@ -99,7 +99,8 @@ export class ScrollLoader {
         if (el.innerHTML.length === 0) {
           // Define ngClassName based on component settings or build default ngClassName based on element value.
           let ngClassName = (typeof this.components[id]["ngClassName"] === 'string') ?
-              this.components[id]["ngClassName"] : this.convertToNgClassName(this.components[id]["element"]);
+              this.components[id]["ngClassName"] : this.convertToNgClassName(this.components[id]["element"]) + 'NgFactory';
+          console.log('ngClassName: ' + ngClassName);
           let selector = "#" + id;
           this.bootstrapComponent(id, ngClassName, selector);
         }

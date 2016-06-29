@@ -22,7 +22,7 @@ function pdb_ng2_component_info_alter($components) {
       if (isset($config_settings) && $config_settings->get('development_mode')) {
         $ext = 'ts';
       }
-      $component->info['path'] = $component->getPath() . '/component.' . $ext;
+      $component->info['path'] = $component->getPath() . '/component.ngfactory.' . $ext;
     }
     else {
       $path = $component->info['path'];
