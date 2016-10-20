@@ -1,18 +1,24 @@
 {
   "compilerOptions": {
     "target": "ES5",
-    "module": "system",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
+    "pretty": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noUnusedLocals": true,
     "removeComments": true,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "baseUrl": "./src",
+    "typeRoots": ["node_modules/@types"],
+    "types": [
+      "core-js",
+      "systemjs"
+    ]
   },
   "exclude": [
-    "node_modules",
-    "typings/index",
-    "typings/index.d.ts"
+    "node_modules"
   ]
 }

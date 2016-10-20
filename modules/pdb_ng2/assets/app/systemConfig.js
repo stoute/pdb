@@ -46,8 +46,7 @@
     return extended;
   }
 
-  var modulePath = drupalSettings.path.baseUrl +
-      drupalSettings.pdb.ng2.module_path;
+  var modulePath = drupalSettings.path.baseUrl + drupalSettings.pdb.ng2.module_path;
 
   var ext = 'ts';
 
@@ -59,13 +58,19 @@
   var map = {
     'app': modulePath + '/assets/app',
     'classes': modulePath + '/assets/classes',
-    'components': modulePath + '/components',
-    '@angular': modulePath + '/node_modules/@angular',
-    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
+    'components': modulePath + '/components'
   };
 
   var paths = {
-    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
+    'app': modulePath + '/assets/app',
+    'classes/*': modulePath + '/assets/classes/*',
+    '@angular/*': modulePath + '/node_modules/@angular/*',
+    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.js',
+
+    'components': modulePath + '/components/*/index.' + ext,
+    'components/*/globals': modulePath + '/components/*/globals.' + ext,
+
+    'helpers/*': modulePath + '/assets/helpers/*/index.' + ext
   };
 
   var packages = {
@@ -76,11 +81,14 @@
     classes: {
       defaultExtension: ext
     },
-    components: {
+    'helpers/*': {
+      defaultExtension: ext
+    },
+    'components': {
       defaultExtension: ext
     },
     rxjs: {
-      main: 'bundles/Rx.umd.js',
+      main: 'bundles/Rx.js',
       defaultExtension: 'js'
     }
   };
@@ -91,9 +99,7 @@
     'core',
     'http',
     'platform-browser',
-    'platform-browser-dynamic',
-    'router-deprecated',
-    'upgrade'
+    'platform-browser-dynamic'
   ];
 
   // Add package entries for angular packages.
@@ -113,8 +119,8 @@
       emitDecoratorMetadata: true
     },
     // Packages defines our app package.
-    packages: packages,
     map: map,
+    packages: packages,
     paths: paths
   };
 

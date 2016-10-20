@@ -5,24 +5,33 @@
  * - Load components on demand when a compnent element is scolled, resized or
  *   orientationchanged into view.
  */
-import {enableProdMode, ComponentResolver, ComponentFactory, ApplicationRef} from "@angular/core";
 
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/fromEvent";
-import "rxjs/add/operator/debounceTime";
+// Lib imports
+import {
+    enableProdMode,
+    Injector,
+    ApplicationRef,
+    NgModuleRef,
+    NgZone,
+    NgModuleFactory,
+    ReflectiveInjector,
+    ApplicationInitStatus,
+    SystemJsNgModuleLoader
+} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/debounceTime';
+// External imports
+import {LazyLoadComponent} from 'helpers/lazy-load-component';
 
 if (drupalSettings.pdb.ng2.development_mode === 0) {
   enableProdMode();
 }
 
 export class ScrollLoader {
-  app: any[];
-  components: any;
-  componentIds: string[];
+  public componentIds: string[];
 
-  constructor(app: ApplicationRef, components) {
-    this.app = app;
-    this.components = components;
+  constructor(public appModule: NgModuleRef<any>, public components: any) {
     this.componentIds = Object.keys(components);
     this.subscribe();
   }
@@ -30,11 +39,13 @@ export class ScrollLoader {
   /**
    * Initialize any components in view on page load.
    */
-  initialize() {
-    // Originally, this query was using a concrete class named "content-wrap"
-    // but we may need a generic approach that don't require to add
-    // a specific class to pages using ng2. Just for now, use "body" element.
-    let content = document.querySelector("body");
+  public initialize(): void {
+    // Get the components wrapper selector to search for components.
+    // Defaults to body.
+    // let componentsWrapper = drupalSettings.pdb.ng2.components_wrapper;
+    let componentsWrapper = 'body';
+
+    let content = document.querySelector(componentsWrapper);
 
     if (content) {
       this.checkElements(this.componentIds);
@@ -45,23 +56,23 @@ export class ScrollLoader {
    * Subscribe to window scroll, resize and orientationchange events, binding
    * a checkElements call to check if components are now in view.
    */
-  subscribe() {
-    Observable.fromEvent(window, "scroll")
-      .debounceTime(200)
-      .subscribe(x => {
-        this.checkElements(this.componentIds);
-      }, this);
+  public subscribe(): void {
+    Observable.fromEvent(window, 'scroll')
+        .debounceTime(200)
+        .subscribe(x => {
+          this.checkElements(this.componentIds);
+        });
 
-    Observable.fromEvent(window, "resize")
-      .debounceTime(200)
-      .subscribe(x => {
-        this.checkElements(this.componentIds);
-      }, this);
+    Observable.fromEvent(window, 'resize')
+        .debounceTime(200)
+        .subscribe(x => {
+          this.checkElements(this.componentIds);
+        });
 
-    Observable.fromEvent(window, "orientationchange")
-      .subscribe(x => {
-        this.checkElements(this.componentIds);
-      }, this);
+    Observable.fromEvent(window, 'orientationchange')
+        .subscribe(x => {
+          this.checkElements(this.componentIds);
+        });
   }
 
   /**
@@ -70,7 +81,7 @@ export class ScrollLoader {
    *
    * @param {string} id of element to be unsubscribed
    */
-  unsubscribe(id) {
+  public unsubscribe(id: string): void {
     if (this.componentIds.length) {
       let index = this.componentIds.indexOf(id);
 
@@ -90,17 +101,18 @@ export class ScrollLoader {
    *
    * @param {Array.<string>} ids of component elements
    */
-  checkElements(ids) {
+  public checkElements(ids: string[]): void {
     ids.forEach((id, index) => {
       let el = document.getElementById(id);
 
       if (el && this.elementInViewport(el)) {
         // assuming if innerHTML is empty module has not been loaded
         if (el.innerHTML.length === 0) {
-          // Define ngClassName based on component settings or build default ngClassName based on element value.
+          // Define ngClassName based on component settings or build default
+          // ngClassName based on element value.
           let ngClassName = (typeof this.components[id]["ngClassName"] === 'string') ?
               this.components[id]["ngClassName"] : this.convertToNgClassName(this.components[id]["element"]);
-          let selector = "#" + id;
+          let selector = '#' + id;
           this.bootstrapComponent(id, ngClassName, selector);
         }
       }
@@ -114,37 +126,65 @@ export class ScrollLoader {
    * @param {string} ngClassName - Component Class Name
    * @param {string} selector - selctor of DOM element to bootstrap into
    */
-  bootstrapComponent(id, ngClassName, selector) {
-    let componentFile = Drupal.url(drupalSettings.pdb.ng2.components[id]["uri"]);
+  public bootstrapComponent(id: string, ngClassName: string, selector: string): void {
+    var ext = 'ts';
 
-    System.import(componentFile).then((componentClass) => {
-      return componentClass[ngClassName];
-    }).then((component) => {
-      // use dynamic bootstrap function
-      this.bootstrapWithCustomSelector(this.app, component, selector).then((bootstrappedComponent) => {
-        // successfully bootstrapped, stop checking if in viewport
-        this.unsubscribe(id);
-      });
-    });
+    if (drupalSettings.pdb.ng2.development_mode === 0) {
+      ext = 'js';
+    }
+
+    let componentFile = Drupal.url(drupalSettings.pdb.ng2.components[id]["uri"]) + '/index.' + ext;
+
+    // load and compile the module lazy loaded
+    const ngModuleLoader = this.appModule.injector.get(SystemJsNgModuleLoader);
+
+    return ngModuleLoader.loadAndCompile(`${componentFile}#${ngClassName}`)
+        .then(moduleFactory => {
+          // use dynamic bootstrap function
+          this.bootstrapWithCustomSelector(moduleFactory, selector, ngClassName);
+        })
+        .then(() => {
+          // successfully bootstrapped, stop checking if in viewport
+          this.unsubscribe(id);
+        });
   }
 
   /**
    * Dynamically bootstrap a component into a selector.
-   * This is a hack.
-   * Courtesy Tobias Bosch.
-   * @see https://github.com/angular/angular/issues/7136
+   * This is... no longer a hack !o!
    *
-   * @param {object} app - root application
-   * @param {object} component - the instance of component to bootstrap
-   * @param {string} selector - the DOM element to bootstrap into
-   * @returns {object} - ComponentRef of boostrapped component
+   * @param {NgModuleFactory<any>} moduleFactory  Module to bootstrap
+   * @param {string}               selector       The DOM element to bootstrap into
    */
-  bootstrapWithCustomSelector(app, component, selector: string) {
-    var componentResolver: ComponentResolver = app.injector.get(ComponentResolver);
-    return componentResolver.resolveComponent(component).then((cf : ComponentFactory) =>
-    {
-      cf.selector = selector;
-      return app.bootstrap(cf);
+  public bootstrapWithCustomSelector(moduleFactory: NgModuleFactory<any>, selector: string, ngClassName: string): void {
+    const ngZone = this.appModule.injector.get(NgZone);
+
+    ngZone.run(() => {
+      // Get the parent injector and create the module
+      const parentInjector = ReflectiveInjector.resolveAndCreate([], this.appModule.injector);
+      const ngModule = moduleFactory.create(parentInjector);
+
+      // Some dependencies from this module
+      const appRef = ngModule.injector.get(ApplicationRef);
+      const inj = ngModule.injector.get(Injector);
+      const initStatus = ngModule.injector.get(ApplicationInitStatus);
+      const lazyLoad = ngModule.injector.get(LazyLoadComponent);
+
+      if (!lazyLoad) {
+        throw(`${ngClassName} is not using the LazyLoadComponent. This is
+          necessary to bootstrap the component. Check the docs.`);
+      }
+
+      initStatus.donePromise.then(() => {
+        // Get the component factory and create it
+        const compFactory = ngModule.componentFactoryResolver
+            .resolveComponentFactory(lazyLoad);
+        const compRef = compFactory.create(inj, [], selector);
+
+        // Register the change detector to the app and trigger the first detection
+        compRef.changeDetectorRef.detectChanges();
+        appRef.registerChangeDetector(compRef.changeDetectorRef);
+      });
     });
   }
 
@@ -154,10 +194,11 @@ export class ScrollLoader {
    * @param {string} - elementName in form "wu-favorites"
    * @returns {string} - ng2 class name in form "WuFavorites"
    */
-  convertToNgClassName(elementName) {
-    return (elementName.toLowerCase().charAt(0).toUpperCase() + elementName.slice(1)).replace(/-(.)/g, (match, group1) => {
-      return group1.toUpperCase();
-    });
+  public convertToNgClassName(elementName: string): string {
+    return (elementName.toLowerCase().charAt(0).toUpperCase() +
+        elementName.slice(1))
+            .replace(/-(.)/g, (match, group1) => group1.toUpperCase()) +
+        'Module';
   }
 
   /**
@@ -170,11 +211,47 @@ export class ScrollLoader {
    * Fixes firefox issue and also loads if any part of element is in
    * view. Returns elements not notInView (in viewport).
    */
-  elementInViewport(el) {
-    let rect = el.getBoundingClientRect();
+  public elementInViewport(el: HTMLElement): boolean {
+    let rect;
 
-    return (
-      !(rect.bottom < 0 || rect.right < 0 || rect.left > (window.innerWidth || document.documentElement.clientWidth) || rect.top > (window.innerHeight || document.documentElement.clientHeight))
+    if (this.supportsBoundingClientRect()) {
+      rect = el.getBoundingClientRect();
+    } else {
+      rect = this.androidChromeBoundingClientRect(el);
+    }
+
+    return !(
+        rect.bottom < 0 ||
+        rect.right < 0 ||
+        rect.left > (window.innerWidth || document.documentElement.clientWidth) ||
+        rect.top > (window.innerHeight || document.documentElement.clientHeight)
     );
+  }
+
+  /**
+   * Gets the offset of the element based on the viewport
+   * This is a fallback for Chrome Android
+   *
+   * @param {object} el - element to check
+   * @returns {object} - the 4 points offset
+   */
+  public androidChromeBoundingClientRect(el: HTMLElement): {
+    top: number, bottom: number, right: number, left: number
+  } {
+    const top = el.offsetTop - window.scrollY;
+    const bottom = top + el.clientHeight;
+    const left = el.offsetLeft - window.scrollX;
+    const right = left + el.clientWidth;
+
+    return {top, bottom, right, left};
+  }
+
+  /**
+   * Checks if a browser is Chrome Android
+   *
+   * @returns {boolean} - If browser is chrome mobile or not
+   */
+  public supportsBoundingClientRect(): boolean {
+    return !/android.*chrome\/[.0-9]+/i.test(window.navigator.userAgent);
   }
 }

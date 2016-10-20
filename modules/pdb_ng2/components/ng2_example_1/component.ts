@@ -5,5 +5,4 @@ import {Component} from '@angular/core';
   selector: 'ng2-example-1',
   templateUrl: 'template.html',
 })
-export class Ng2Example1 {
-}
+export class Ng2Example1 {}
