@@ -6,6 +6,7 @@
 // lib imports
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 // external imports
 import {LazyLoadComponent} from 'helpers/lazy-load-component';
 // internal imports
@@ -15,7 +16,8 @@ export * from './globals';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        FormsModule
     ],
     providers: [
         {provide: LazyLoadComponent, useValue: Ng2Example2}
