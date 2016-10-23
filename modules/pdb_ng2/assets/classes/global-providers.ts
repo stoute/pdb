@@ -22,7 +22,7 @@ export class GlobalProviders {
         ext = 'js';
       }
 
-      importPromises.push(System.import(`${component.uri}/globals.` + ext)
+      importPromises.push(System.import(`/${component.uri}/globals.` + ext)
           .then(component => ({component, componentName}))
           .catch(this.onMissingProvidersFileError.bind(this, componentName)));
     }
