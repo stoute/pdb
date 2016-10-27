@@ -1,34 +1,42 @@
-import {Component, ApplicationRef, ReflectiveInjector, createPlatform} from "@angular/core";
-import {BROWSER_PROVIDERS, BROWSER_APP_PROVIDERS} from "@angular/platform-browser";
-import {BROWSER_APP_COMPILER_PROVIDERS} from "@angular/platform-browser-dynamic";
-import "rxjs/add/operator/map";
+/**
+ * @module App
+ * @preferred
+ */
+import {NgModule, SystemJsNgModuleLoader} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import {ScrollLoader} from '../classes/scroll-loader';
-import {GlobalProviders} from '../classes/global-providers';
+import {ScrollLoader} from 'classes/scroll-loader.ts';
+import {GlobalProviders} from 'classes/global-providers.ts';
 
-var injectables = drupalSettings.pdb.ng2.global_injectables;
-var globalProviders = new GlobalProviders(injectables);
-var importPromises = globalProviders.importGlobalInjectables();
+// Components contains metadata about all ng2 components on the page.
+const components = drupalSettings.pdb.ng2.components;
 
 // Dynamically load all globally shared @Injectable services and pass as
 // providers into main app bootstrap.
-Promise.all(importPromises).then((globalServices) => {
-  // array of providers to pass into longform bootstrap to make @Injectable
-  // services shared globally.
-  var globalProvidersArray = globalProviders.createGlobalProvidersArray(globalServices);
+const globalProviders = new GlobalProviders(components);
 
-  // components contains metadata about all ng2 components on the page.
-  let components = drupalSettings.pdb.ng2.components;
+Promise.all(globalProviders.importGlobalInjectables())
+    .then(globalServices => {
+        // array of providers to pass into longform bootstrap to make @Injectable
+        // services shared globally.
+        let globals = globalProviders
+            .createGlobalProvidersArray(globalServices);
 
-  let platform = createPlatform(ReflectiveInjector.resolveAndCreate(BROWSER_PROVIDERS));
-  let app = ReflectiveInjector
-    .resolveAndCreate([
-      BROWSER_APP_PROVIDERS,
-      BROWSER_APP_COMPILER_PROVIDERS,
-      globalProvidersArray
-    ], platform.injector)
-    .get(ApplicationRef);
+        /**
+         * Root module for the whole application
+         */
+        @NgModule({
+            providers: [SystemJsNgModuleLoader, ...globals.globalProviders],
+            imports: [BrowserModule, ...globals.globalImports]
+        })
+        class AppModule {
+            public ngDoBootstrap(): void {}
+        }
 
-  let loader = new ScrollLoader(app, components);
-  loader.initialize();
-});
+        return platformBrowserDynamic().bootstrapModule(AppModule);
+    })
+    .then(appModule => {
+        let loader = new ScrollLoader(appModule, components);
+        loader.initialize();
+    });
