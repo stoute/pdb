@@ -63,10 +63,13 @@ DEVELOPING FOR PDB
  * Writing your own components:
 
    - Writing components for existing frameworks should be straightforward, write
-     them as usual and add an info.yml file declaring them to the module.
+     them as usual and add an info.yml file declaring them to the module. Some
+     framework implementations may provide extra tooling or require additional
+     boilerplate to use full functionality, see their individual README.txt
+     files for more information.
 
-   - When you find gaps in functionality you need, post them to the issue queue,
-     this module is still in early development stages.
+   - When you find gaps in functionality you need, post them to the github issue
+     queue, as this module is still in early development stages.
 
  * Writing your own framework definitions:
 
@@ -110,6 +113,7 @@ Early Contributors:
  * Jeff Lu
  * Shawn Stedman
  * Emma Cortes
+ * Diego Barahona
  * Mark Casias
  * Bob Kepford
  * Derek Reese
