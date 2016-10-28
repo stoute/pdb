@@ -58,12 +58,12 @@
     'app': modulePath + '/assets/app',
     'classes/*': modulePath + '/assets/classes/*',
     '@angular/*': modulePath + '/node_modules/@angular/*',
-    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.js',
+    'rxjs/*': modulePath + '/node_modules/rxjs',
 
     'components/*': modulePath + '/components/*/index',
     'components/*/globals': modulePath + '/components/*/globals',
 
-    'helpers/*': modulePath + '/assets/helpers/*/index.' + ext
+    'helpers/*': modulePath + '/assets/helpers/*/index'
   };
 
   var packages = {
@@ -71,16 +71,10 @@
       main: 'app',
       defaultExtension: ext
     },
-    classes: {
+    '/modules/pdb/modules/pdb_ng2': {
       defaultExtension: ext
     },
-    'helpers/*': {
-      defaultExtension: ext
-    },
-    '/modules/pdb/modules/pdb_ng2/components': {
-      defaultExtension: ext
-    },
-    rxjs: {
+    'rxjs/*': {
       main: 'bundles/Rx.js',
       defaultExtension: 'js'
     }
@@ -100,7 +94,7 @@
   ngPackageNames.forEach(function (pkgName) {
     // Bundled version (fewer requests).
     packages['@angular/' + pkgName] = {
-      main: 'bundles/' + pkgName + '.umd.js',
+      main: 'bundles/' + pkgName + '.umd',
       defaultExtension: 'js'
     };
   });
@@ -108,10 +102,6 @@
   var config = {
     // Use typescript for compilation.
     transpiler: 'typescript',
-    // Typescript compiler options.
-    typescriptOptions: {
-      emitDecoratorMetadata: true
-    },
     // Packages defines our app package.
     packages: packages,
     paths: paths
