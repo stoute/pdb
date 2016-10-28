@@ -16,13 +16,7 @@ export class GlobalProviders {
       const component = this.injectables[instanceId];
       const componentName = this.convertToNgClassName(component.element);
 
-      var ext = 'ts';
-
-      if (drupalSettings.pdb.ng2.development_mode === 0) {
-        ext = 'js';
-      }
-
-      importPromises.push(System.import(`/${component.uri}/globals.` + ext)
+      importPromises.push(System.import(`/${component.uri}/globals`)
           .then(component => ({component, componentName}))
           .catch(this.onMissingProvidersFileError.bind(this, componentName)));
     }

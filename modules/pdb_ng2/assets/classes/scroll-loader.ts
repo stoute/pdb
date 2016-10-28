@@ -127,13 +127,7 @@ export class ScrollLoader {
    * @param {string} selector - selctor of DOM element to bootstrap into
    */
   public bootstrapComponent(id: string, ngClassName: string, selector: string): void {
-    var ext = 'ts';
-
-    if (drupalSettings.pdb.ng2.development_mode === 0) {
-      ext = 'js';
-    }
-
-    let componentFile = Drupal.url(drupalSettings.pdb.ng2.components[id]["uri"]) + '/index.' + ext;
+    let componentFile = Drupal.url(drupalSettings.pdb.ng2.components[id]["uri"]) + '/index';
 
     // load and compile the module lazy loaded
     const ngModuleLoader = this.appModule.injector.get(SystemJsNgModuleLoader);

@@ -48,18 +48,11 @@
 
   var modulePath = drupalSettings.path.baseUrl + drupalSettings.pdb.ng2.module_path;
 
+  // Set default extension to .ts or .js.
   var ext = 'ts';
-
   if (drupalSettings.pdb.ng2.development_mode === 0) {
     ext = 'js';
   }
-
-  // Map tells the System loader where to look for things.
-  var map = {
-    'app': modulePath + '/assets/app',
-    'classes': modulePath + '/assets/classes',
-    'components': modulePath + '/components'
-  };
 
   var paths = {
     'app': modulePath + '/assets/app',
@@ -67,8 +60,8 @@
     '@angular/*': modulePath + '/node_modules/@angular/*',
     'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.js',
 
-    'components': modulePath + '/components/*/index.' + ext,
-    'components/*/globals': modulePath + '/components/*/globals.' + ext,
+    'components/*': modulePath + '/components/*/index',
+    'components/*/globals': modulePath + '/components/*/globals',
 
     'helpers/*': modulePath + '/assets/helpers/*/index.' + ext
   };
@@ -84,7 +77,7 @@
     'helpers/*': {
       defaultExtension: ext
     },
-    'components': {
+    '/modules/pdb/modules/pdb_ng2/components': {
       defaultExtension: ext
     },
     rxjs: {
@@ -120,7 +113,6 @@
       emitDecoratorMetadata: true
     },
     // Packages defines our app package.
-    map: map,
     packages: packages,
     paths: paths
   };
