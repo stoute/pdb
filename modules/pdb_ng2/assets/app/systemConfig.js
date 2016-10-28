@@ -71,7 +71,7 @@
       main: 'app',
       defaultExtension: ext
     },
-    '/modules/pdb/modules/pdb_ng2': {
+    '/': {
       defaultExtension: ext
     },
     'rxjs/*': {
