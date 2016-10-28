@@ -75,7 +75,7 @@
       defaultExtension: ext
     },
     'rxjs/*': {
-      main: 'bundles/Rx.js',
+      main: 'bundles/Rx.min.js',
       defaultExtension: 'js'
     }
   };
@@ -94,7 +94,7 @@
   ngPackageNames.forEach(function (pkgName) {
     // Bundled version (fewer requests).
     packages['@angular/' + pkgName] = {
-      main: 'bundles/' + pkgName + '.umd',
+      main: 'bundles/' + pkgName + '.umd.min',
       defaultExtension: 'js'
     };
   });
