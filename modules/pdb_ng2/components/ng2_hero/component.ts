@@ -56,7 +56,6 @@ import { Ng2HeroDetail } from './ng2_hero_detail/component';
       border-radius: 4px 0 0 4px;
     }
   `],
-  directives: [Ng2HeroDetail]
 })
 export class Ng2Hero {
   title = 'Tour of Heroes';
