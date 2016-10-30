@@ -11,7 +11,15 @@
     "removeComments": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
+    "paths": {
+      "classes/*": [
+        "assets/classes/*"
+      ],
+      "helpers/*": [
+        "assets/helpers/*"
+      ]
+    },
     "typeRoots": ["node_modules/@types"],
     "types": [
       "core-js",
@@ -19,6 +27,7 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "typings"
   ]
 }
