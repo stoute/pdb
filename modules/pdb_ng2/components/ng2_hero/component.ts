@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 
 import { Hero } from './hero';
-import { Ng2HeroDetail } from './ng2_hero_detail/component';
 
 @Component({
   moduleId: __moduleName,
