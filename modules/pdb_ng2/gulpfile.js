@@ -18,7 +18,7 @@ function clean(){
 
 // Run angular's template compiler.
 function precompile(cb){
-    exec('./node_modules/.bin/ngc -p components', function(err, stdout, stderr){
+    exec('./node_modules/.bin/ngc -p tsconfig-aot.json --traceResolution', function(err, stdout, stderr){
         console.log(stdout);
         console.log(stderr);
         cb(err);

@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "classes/*": [
+        "assets/classes/*"
+      ],
+      "helpers/*": [
+        "assets/helpers/*"
+      ],
+      "*": ["custom_typings/*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "types": [
+      "core-js",
+      "systemjs"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "typings"
+  ],
+  "files": [
+    "assets/app/app.ts"
+  ],
+
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit" : true
+  }
+}
