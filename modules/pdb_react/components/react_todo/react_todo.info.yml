@@ -20,6 +20,6 @@ add_js:
     'js/app.jsx': { attributes: { type: 'text/jsx' } }
 add_css:
   header:
-    state:
+    component:
       'css/base.css': {}
       'css/index.css': {}
