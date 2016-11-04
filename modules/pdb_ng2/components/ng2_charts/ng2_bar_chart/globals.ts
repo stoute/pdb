@@ -5,4 +5,4 @@
 // external imports
 import {mergeGlobals} from 'helpers/globals';
 
-export const Ng2ChartsGlobals = mergeGlobals({}, []);
+export const Ng2BarChartGlobals = mergeGlobals({}, []);

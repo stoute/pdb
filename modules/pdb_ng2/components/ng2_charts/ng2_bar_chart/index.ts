@@ -11,7 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {LazyLoadComponent} from 'helpers/lazy-load-component';
 // internal imports
-import {Ng2Charts} from './component';
+import {Ng2BarChart} from './component';
 // exports
 export * from './globals';
 
@@ -22,13 +22,13 @@ export * from './globals';
         ChartsModule
     ],
     providers: [
-        {provide: LazyLoadComponent, useValue: Ng2Charts}
+        {provide: LazyLoadComponent, useValue: Ng2BarChart}
     ],
     declarations: [
-        Ng2Charts
+        Ng2BarChart
     ],
     entryComponents: [
-        Ng2Charts
+        Ng2BarChart
     ]
 })
-export class Ng2ChartsModule {}
+export class Ng2BarChartModule {}

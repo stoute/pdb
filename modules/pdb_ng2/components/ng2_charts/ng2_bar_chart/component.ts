@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Inject, ElementRef} from '@angular/core';
 
 @Component({
     moduleId: __moduleName,
-    selector: 'bar-chart-demo',
+    selector: 'ng2-bar-chart',
     templateUrl: 'template.html',
 })
-export class Ng2Charts {
+export class Ng2BarChart {
     public barChartOptions:any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -15,18 +15,9 @@ export class Ng2Charts {
     public barChartLegend:boolean = true;
 
     public barChartData:any[] = [
-        {data: [65, 59, 60, 81, 16, 55, 40], label: 'Kodos'},
+        {data: [65, 52, 60, 81, 14, 55, 40], label: 'Kodos'},
         {data: [28, 48, 40, 19, 86, 27, 60], label: 'Kang'}
     ];
-
-    // events
-    public chartClicked(e:any):void {
-        console.log(e);
-    }
-
-    public chartHovered(e:any):void {
-        console.log(e);
-    }
 
     public randomize():void {
         // Only Change 3 values
