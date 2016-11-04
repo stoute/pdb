@@ -60,6 +60,8 @@
     '@angular/*': modulePath + '/node_modules/@angular/*',
     'rxjs/*': modulePath + '/node_modules/rxjs',
 
+    'ng2-charts': modulePath + '/components/ng2_charts/node_modules/ng2-charts',
+
     'components/*': modulePath + '/components/*/index',
     'components/*/globals': modulePath + '/components/*/globals',
 
@@ -73,6 +75,10 @@
     },
     '/': {
       defaultExtension: ext
+    },
+    'ng2-charts': {
+      main: 'ng2-charts.js',
+      defaultExtension: 'js'
     },
     'rxjs/*': {
       main: 'bundles/Rx.min.js',
