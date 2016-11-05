@@ -15,4 +15,8 @@ export class Ng2RadarChart {
     ];
     public radarChartType:string = 'radar';
 
+    // Events
+    public chartClicked(e:any):void {}
+
+    public chartHovered(e:any):void {}
 }

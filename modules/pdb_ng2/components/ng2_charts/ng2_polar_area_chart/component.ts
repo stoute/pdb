@@ -13,4 +13,8 @@ export class Ng2PolarAreaChart {
 
     public polarAreaChartType:string = 'polarArea';
 
+    // Events
+    public chartClicked(e:any):void {}
+
+    public chartHovered(e:any):void {}
 }

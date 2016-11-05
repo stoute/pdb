@@ -56,4 +56,9 @@ export class Ng2LineChart {
         }
         this.lineChartData = _lineChartData;
     }
+
+    // Events
+    public chartClicked(e:any):void {}
+
+    public chartHovered(e:any):void {}
 }

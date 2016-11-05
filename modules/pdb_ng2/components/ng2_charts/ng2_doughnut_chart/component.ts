@@ -11,4 +11,8 @@ export class Ng2DoughnutChart {
     public doughnutChartData:number[] = [350, 450, 100];
     public doughnutChartType:string = 'doughnut';
 
+    // Events
+    public chartClicked(e:any):void {}
+
+    public chartHovered(e:any):void {}
 }
