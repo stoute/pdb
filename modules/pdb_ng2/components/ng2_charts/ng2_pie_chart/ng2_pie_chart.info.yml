@@ -15,3 +15,10 @@ configuration:
     type: textfield
     title: 'Path to your JSON endpoint'
     default_value: '/data.json'
+system_config:
+  paths:
+    ng2-charts: '/components/ng2_charts/node_modules/ng2-charts'
+  packages:
+    ng2-charts:
+      main: 'ng2-charts.js'
+      defaultExtension: 'js'

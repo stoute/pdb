@@ -60,8 +60,6 @@
     '@angular/*': modulePath + '/node_modules/@angular/*',
     'rxjs/*': modulePath + '/node_modules/rxjs',
 
-    'ng2-charts': modulePath + '/components/ng2_charts/node_modules/ng2-charts',
-
     'components/*': modulePath + '/components/*/index',
     'components/*/globals': modulePath + '/components/*/globals',
 
@@ -75,10 +73,6 @@
     },
     '/': {
       defaultExtension: ext
-    },
-    'ng2-charts': {
-      main: 'ng2-charts.js',
-      defaultExtension: 'js'
     },
     'rxjs/*': {
       main: 'bundles/Rx.min.js',
@@ -104,6 +98,18 @@
       defaultExtension: 'js'
     };
   });
+
+  // Our components may make additions via their YAML files, add them.
+  if ('system_config' in drupalSettings.pdb.ng2) {
+    if ('packages' in drupalSettings.pdb.ng2.system_config) {
+      packages = extend(true, packages, drupalSettings.pdb.ng2.system_config.packages);
+    }
+    if ('paths' in drupalSettings.pdb.ng2.system_config) {
+      for (var prop in drupalSettings.pdb.ng2.system_config.paths) {
+        paths[prop] = modulePath + drupalSettings.pdb.ng2.system_config.paths[prop];
+      }
+    }
+  }
 
   var config = {
     // Use typescript for compilation.
