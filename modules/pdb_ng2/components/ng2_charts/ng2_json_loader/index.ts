@@ -7,28 +7,25 @@ export class Ng2JsonLoader {
 
     load(id) {
         var jsonPath = drupalSettings.pdb.configuration[id].jsonPath;
-        console.log(jsonPath);
-        var httpRes = this.http.get(jsonPath);
-        console.log(httpRes);
-        return httpRes;
+        return this.http.get(jsonPath);
     }
 
-    getLabels(json) {
+    getLabels(json, field) {
         var labels:string[] = [];
 
         for (let a of json) {
-            if (!labels.includes(a.hair_color)) {
-                labels.push(a.hair_color);
+            if (!labels.includes(a[field])) {
+                labels.push(a[field]);
             }
         }
         return labels;
     }
 
-    getData(json, labels) {
+    getData(json, labels, field) {
         var counts = {};
 
         for (let a of json) {
-            let c = a.hair_color;
+            let c = a[field];
             if (c in counts) {
                 counts[c]++;
             }

@@ -21,16 +21,16 @@ export class Ng2PieChart {
     ) {
 
         // Strip the 'instance-id-' off the beginning of our selector for uuid.
-        var instanceId = elRef.nativeElement.id.substring(12);
+        let instanceId = elRef.nativeElement.id.substring(12);
+        let field = drupalSettings.pdb.configuration[instanceId]['targetField'];
 
         const jsonObs = jsonLoader.load(instanceId);
 
         jsonObs.subscribe((res: Response) => {
             let json = res.json();
-            console.log(json);
-            let labels = jsonLoader.getLabels(json);
+            let labels = jsonLoader.getLabels(json, field);
             this.pieChartLabels = labels;
-            this.pieChartData = jsonLoader.getData(json, labels);
+            this.pieChartData = jsonLoader.getData(json, labels, field);
         });
     }
 
