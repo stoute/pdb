@@ -7,6 +7,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 // external imports
 import {ChartsModule} from 'ng2-charts';
 import {LazyLoadComponent} from 'helpers/lazy-load-component';
@@ -19,7 +20,8 @@ export * from './globals';
     imports: [
         CommonModule,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        HttpModule
     ],
     providers: [
         {provide: LazyLoadComponent, useValue: Ng2PieChart}

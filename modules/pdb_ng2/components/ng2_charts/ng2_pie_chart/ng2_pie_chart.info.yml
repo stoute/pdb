@@ -10,3 +10,8 @@ presentation: ng2
 add_js:
   footer:
     '../node_modules/chart.js/dist/Chart.bundle.min.js': {}
+configuration:
+  jsonPath:
+    type: textfield
+    title: 'Path to your JSON endpoint'
+    default_value: '/data.json'
