@@ -10,3 +10,19 @@ presentation: ng2
 add_js:
   footer:
     '../node_modules/chart.js/dist/Chart.bundle.min.js': {}
+configuration:
+  jsonPath:
+    type: textfield
+    title: 'Path to your JSON endpoint'
+    default_value: '/data.json'
+  targetField:
+    type: textfield
+    title: 'Field name to target'
+    default_value: 'hair_color'
+system_config:
+  paths:
+    ng2-charts: '/components/ng2_charts/node_modules/ng2-charts'
+  packages:
+    ng2-charts:
+      main: 'ng2-charts.js'
+      defaultExtension: 'js'
