@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {TodoStore, Todo} from './services/store';
 
 @Component({
@@ -12,7 +12,7 @@ export class Ng2Todo {
     todoStore: TodoStore;
     newTodoText = '';
 
-    constructor(todoStore: TodoStore) {
+    constructor(@Inject(TodoStore) todoStore: TodoStore) {
         this.todoStore = todoStore;
     }
 
