@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "chart.js": "2.3.0",
+    "ng2-charts": "1.4.1"
+  }
+}

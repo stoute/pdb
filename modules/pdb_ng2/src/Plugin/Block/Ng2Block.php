@@ -53,13 +53,18 @@ class Ng2Block extends PdbBlock {
       'element' => $machine_name,
     ];
     // Check if ng_class_name was defined.
-    if(!empty($component['ng_class_name'])) {
+    if (!empty($component['ng_class_name'])) {
       // Add "ngClassName" value.
       $attached['drupalSettings']['pdb']['ng2']['components']['instance-id-' . $uuid] += [
         'ngClassName' => $component['ng_class_name'],
       ];
     }
     $attached['drupalSettings']['pdb']['ng2']['module_path'] = drupal_get_path('module', 'pdb_ng2');
+
+    // If we need to extend systemConfig, grab our values.
+    if (!empty($component['system_config'])) {
+      $attached['drupalSettings']['pdb']['ng2']['system_config'] = $component['system_config'];
+    }
 
     $config_settings = \Drupal::config('pdb_ng2.settings');
     if (isset($config_settings)) {
