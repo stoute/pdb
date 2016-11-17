@@ -28,19 +28,17 @@ export class Ng2BarChart {
         @Inject(ElementRef) private elRef: ElementRef
     ) {
 
+        this.elRef = elRef;
+        this.jsonLoader = jsonLoader;
         // Strip the 'instance-id-' off the beginning of our selector for uuid.
         let instanceId = elRef.nativeElement.id.substring(12);
         let field = drupalSettings.pdb.configuration[instanceId]['targetField'];
-
-        console.log(field);
 
         const jsonObs = jsonLoader.load(instanceId);
 
         jsonObs.subscribe((res: Response) => {
             let json = res.json();
-            console.log(json);
             let labels = jsonLoader.getLabels(json, field);
-            console.log(labels);
             this.barChartLabels = labels;
             let data = jsonLoader.getData(json, labels, field);
             this.barChartData = [{data: `${data}`, label: 'Test'}];

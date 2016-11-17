@@ -1,4 +1,4 @@
-import {Component, Inject, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
     moduleId: __moduleName,

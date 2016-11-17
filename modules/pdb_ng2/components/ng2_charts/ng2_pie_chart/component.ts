@@ -19,7 +19,8 @@ export class Ng2PieChart {
         @Inject(Ng2JsonLoader) private jsonLoader: Ng2JsonLoader,
         @Inject(ElementRef) private elRef: ElementRef
     ) {
-
+        this.elRef = elRef;
+        this.jsonLoader = jsonLoader;
         // Strip the 'instance-id-' off the beginning of our selector for uuid.
         let instanceId = elRef.nativeElement.id.substring(12);
         let field = drupalSettings.pdb.configuration[instanceId]['targetField'];
