@@ -1,0 +1,12 @@
+name: NG2 Doughnut Chart
+machine_name: ng2-doughnut-chart
+type: pdb
+description: 'NG 2 Doughnut Chart'
+package: NG2
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: ng2
+add_js:
+  footer:
+    '../node_modules/chart.js/dist/Chart.bundle.min.js': {}

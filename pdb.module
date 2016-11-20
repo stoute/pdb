@@ -117,7 +117,13 @@ function _pdb_library_build_js($info, $path) {
 function _pdb_library_build_get_assets($assets, $path, $group = FALSE) {
   $processed = [];
   foreach ($assets as $asset_file => $asset_data) {
-    $asset_path = '/' . $path . '/' . $asset_file;
+    // Allow external assets to use absolute path.
+    if (!empty($asset_data['type']) && $asset_data['type'] == 'external') {
+      $asset_path = $asset_file;
+    }
+    else {
+      $asset_path = '/' . $path . '/' . $asset_file;
+    }
 
     $processed[$asset_path] = $asset_data;
   }

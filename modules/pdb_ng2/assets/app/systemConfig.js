@@ -99,6 +99,18 @@
     };
   });
 
+  // Our components may make additions via their YAML files, add them.
+  if ('system_config' in drupalSettings.pdb.ng2) {
+    if ('packages' in drupalSettings.pdb.ng2.system_config) {
+      packages = extend(true, packages, drupalSettings.pdb.ng2.system_config.packages);
+    }
+    if ('paths' in drupalSettings.pdb.ng2.system_config) {
+      for (var prop in drupalSettings.pdb.ng2.system_config.paths) {
+        paths[prop] = modulePath + drupalSettings.pdb.ng2.system_config.paths[prop];
+      }
+    }
+  }
+
   var config = {
     // Use typescript for compilation.
     transpiler: 'typescript',
