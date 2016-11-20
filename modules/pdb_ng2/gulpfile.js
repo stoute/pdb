@@ -42,7 +42,7 @@ function copy_src(){
 
 // Task definitions.
 gulp.task('compile', compile);
-gulp.task('precompile', ['copy:src'], precompile);
+gulp.task('precompile', precompile);
 gulp.task('copy:src', ['clean'], copy_src);
 gulp.task('clean', clean);
 gulp.task('watch', function() {

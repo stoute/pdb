@@ -2,6 +2,9 @@
  * @module App
  * @preferred
  */
+
+/// <reference path="../../custom-typings/window.d.ts" />
+
 import {NgModule, SystemJsNgModuleLoader} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';

@@ -10,6 +10,8 @@
     "removeComments": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
     "paths": {
       "classes/*": [
@@ -17,13 +19,13 @@
       ],
       "helpers/*": [
         "assets/helpers/*"
-      ],
-      "*": ["custom_typings/*"]
+      ]
     },
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [ "./typings" ],
     "types": [
       "core-js",
-      "systemjs"
+      "systemjs",
+      "node"
     ]
   },
   "exclude": [
