@@ -28,7 +28,11 @@ Promise.all(globalProviders.importGlobalInjectables())
         AppModule.prototype.ngDoBootstrap = function () { };
         AppModule = __decorate([
             core_1.NgModule({
-                providers: [core_1.SystemJsNgModuleLoader].concat(globals.globalProviders, [index_1.APP_BASE_PROVIDERS]),
+                providers: [
+                    core_1.SystemJsNgModuleLoader
+                ].concat(globals.globalProviders, [
+                    index_1.APP_BASE_PROVIDERS
+                ]),
                 imports: [
                     platform_browser_1.BrowserModule
                 ].concat(globals.globalImports, [

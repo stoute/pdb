@@ -65,8 +65,11 @@
 
         'helpers/*': modulePath + '/assets/helpers/*/index',
 
+        //'ng2-translate/*': modulePath + '/node_modules/ng2-translate/ng2-translate/*',
         // 'app-base-library': modulePath + '/node_modules/app-base-library',
+        
         '../../node_modules/app-base-library/src/library': modulePath + '/node_modules/app-base-library/dist/library',
+        '../../node_modules/ng2-translate/ng2-translate': modulePath + '/node_modules/ng2-translate/ng2-translate',
         //  'app-base-library': 'https://app-base-library.firebaseapp.com/dist/library'
     };
 

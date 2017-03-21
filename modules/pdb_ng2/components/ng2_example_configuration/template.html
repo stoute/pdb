@@ -1,3 +1,26 @@
 <div class="ng2-example-configuration">
-    <p>Your instance configured textfield value is: {{text}}</p>
+    <p>textfield value is: {{text}}</p>
+    <p>textfield2 value is: {{text2}}</p>
+</div>
+
+<!--<drupal-node [node]="node"></drupal-node>-->
+<p>fixme: drupal-node</p>
+
+<div class="node node--type-{{node.type[0].target_id}} node--view-mode-full clearfix" >
+<!--<div class="node node&#45;&#45;type-{{node.type[0].target_id}} node&#45;&#45;view-mode-full clearfix" id="node-{{ node | nid }}" data-nid="{{ node | nid }}"  data-uuid="{{ node.uuid[0].value }}" >-->
+    <h3 class="title" >{{ node.title[0].value }}</h3>
+    <div class="content">
+        <!--<div class="body" ng-bind-html="node.body[0].value | trustAsHtml | drupalBody"></div>-->
+
+        <!--<div ng-if="node.field_iframe" class="field&#45;&#45;name-field-iframe field-iframe"><iframe ng-src="{{node.field_iframe[0]['uri'] | trustAsSrc }}" width="{{ node.field_width[0]['value'] }}" height="{{ node.field_height[0]['value'] }}" frameborder="0" style="visibility:hidden;" onload="this.style.visibility='visible';" allowtransparency=”true”></iframe></div>-->
+
+        <!--<div ng-repeat="(key, value) in node._embedded">-->
+            <!--<div ng-if="key.indexOf('field_image') > -1">-->
+                <!--<div class="field&#45;&#45;name-field-image field-image" ng-repeat="field in node._embedded[key]"><img class="field-field_image" alt="image" ng-src="{{ field['uri'][0].value | drupalImage }}" /></div>-->
+            <!--</div>-->
+            <!--<div ng-if="key.indexOf('field_file') > -1">-->
+                <!--<div class="field&#45;&#45;name-field-file field-file well" ng-repeat="field in node._embedded[key]"><a ng-href="{{ field['uri'][0].value }}">{{ field['uri'][0].value }}</a></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
 </div>
