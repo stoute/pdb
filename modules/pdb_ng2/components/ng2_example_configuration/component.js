@@ -25,10 +25,9 @@ var Ng2ExampleConfiguration = (function () {
             templateUrl: 'template.html',
         }),
         __param(0, core_1.Inject(core_1.ElementRef)), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], Ng2ExampleConfiguration);
     return Ng2ExampleConfiguration;
-    var _a;
 }());
 exports.Ng2ExampleConfiguration = Ng2ExampleConfiguration;
 //# sourceMappingURL=component.js.map

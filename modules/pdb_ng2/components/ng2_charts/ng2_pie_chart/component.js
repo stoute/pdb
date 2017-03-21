@@ -44,10 +44,9 @@ var Ng2PieChart = (function () {
         }),
         __param(0, core_1.Inject(index_1.Ng2JsonLoader)),
         __param(1, core_1.Inject(core_1.ElementRef)), 
-        __metadata('design:paramtypes', [index_1.Ng2JsonLoader, (typeof (_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [index_1.Ng2JsonLoader, core_1.ElementRef])
     ], Ng2PieChart);
     return Ng2PieChart;
-    var _a;
 }());
 exports.Ng2PieChart = Ng2PieChart;
 //# sourceMappingURL=component.js.map

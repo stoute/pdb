@@ -10,9 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var scroll_loader_1 = require('classes/scroll-loader');
 var global_providers_1 = require('classes/global-providers');
+var index_1 = require('../../node_modules/app-base-library/src/library/angular/index');
 var components = drupalSettings.pdb.ng2.components;
 var globalProviders = new global_providers_1.GlobalProviders(components);
 Promise.all(globalProviders.importGlobalInjectables())
@@ -25,8 +28,14 @@ Promise.all(globalProviders.importGlobalInjectables())
         AppModule.prototype.ngDoBootstrap = function () { };
         AppModule = __decorate([
             core_1.NgModule({
-                providers: [core_1.SystemJsNgModuleLoader].concat(globals.globalProviders),
-                imports: [platform_browser_1.BrowserModule].concat(globals.globalImports)
+                providers: [core_1.SystemJsNgModuleLoader].concat(globals.globalProviders, [index_1.APP_BASE_PROVIDERS]),
+                imports: [
+                    platform_browser_1.BrowserModule
+                ].concat(globals.globalImports, [
+                    forms_1.FormsModule,
+                    http_1.HttpModule,
+                    forms_1.ReactiveFormsModule,
+                ])
             }), 
             __metadata('design:paramtypes', [])
         ], AppModule);

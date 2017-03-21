@@ -18,6 +18,9 @@
       ],
       "helpers/*": [
         "assets/helpers/*"
+      ],
+      "FIXME_app-base-library/*": [
+        "node_modules/app-base-library/*"
       ]
     },
     "typeRoots": ["node_modules/@types"],
